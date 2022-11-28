@@ -11,7 +11,7 @@ def game():
     character = make_character("Player Name")
     achieved_goal = False
     while not achieved_goal:
-        describe_current_location(board, character)
+        find_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
         if valid_move:
