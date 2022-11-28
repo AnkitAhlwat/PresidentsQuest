@@ -1,30 +1,20 @@
 def make_board():
-    white_house_map = [[0, 1, 1, 1],
-                       [0, 1, 1, 1],
-                       [0, 0, 1],
-                       [0, 0, 1, 0, 0, 1, 1, 0],
-                       [0, 0, 1, 0, 0, 1, 0, 0],
-                       [0, 0, 1, 0, 0, 1, 0, 0],
-                       [0, 1, 1, 1, 1, 1, 0, 0],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
-                       [0, 0, 1, 0, 0, 1, 1, 1],
-                       [0, 0, 1, 0, 0, 1, 1, 1],
-                       [0, 1, 1, 1, 1, 1, 1, 1],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
-                       [0, 1, 1, 1, 0, 1, 1, 1],
-                       [1, 1, 1, 1, 1, 1, 1, 1],
-                       [0, 1, 1, 1, 0, 1, 1, 1],
-                       [0, 0, 1, 0]]
+    map_icons ={
+        "0": "\U00002B1B",
+        "1": "\U00002B1C",
+        "S": "\U0001F6D2",
+        "B": "\U00002694",
+        "C": "\U0001F935"
 
-    for row in white_house_map:
-        print("\t", end="")
-        for room in row:
-            if room == 1:
-                print("[]", end="")
-            else:
-                print("  ", end="")
-        print()
+    }
+    with open("white_house.txt", 'r') as white_house_map:
+        board = white_house_map.readlines()
+        for row in board:
+            print("\t", end="")
+            for room in row:
+                if room in map_icons:
+                    print(f'{map_icons[room]}', end="")
+            print()
 
 
 def main():
