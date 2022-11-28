@@ -1,4 +1,4 @@
-def make_board(columns, rows):
+def make_board():
     white_house_map = [[[0, 1, 1, 1],
                        [0, 1, 1, 1]],
 
