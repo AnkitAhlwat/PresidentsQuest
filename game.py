@@ -6,12 +6,13 @@ Jas Randhawa / A01236951 / jasbcit
 from get_user_choice import get_user_choice
 from make_board import make_board
 from make_character import make_character
+from describe_current_location import *
 def game():
     board = make_board()
     character = make_character("Player Name")
     achieved_goal = False
     while not achieved_goal:
-        find_current_location(board, character)
+        run()
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
         if valid_move:
