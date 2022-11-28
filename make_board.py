@@ -8,7 +8,7 @@ def make_board():
 
     }
     with open("white_house.txt", 'r') as white_house_map:
-        coordinates = []
+        coordinates = {}
         board = white_house_map.readlines()
         for index_row, row in enumerate(board):
             print("\t", end="")
@@ -16,7 +16,7 @@ def make_board():
                 if room in map_icons:
                     print(f'{map_icons[room]}', end="")
                 if room != "0" and room != "\n":
-                    coordinates.append((index_row, index_room))
+                    coordinates[(index_row, index_room)] = map_icons.get(room)
             print()
         print(coordinates)
 
