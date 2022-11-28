@@ -9,7 +9,7 @@ def make_character(name):
         'Money': 0,
         'Attack Points': 1,
         'Visited Shop': False,
-        'Items': None,
+        'Items': [],
     }
     return character_dictionary
 
