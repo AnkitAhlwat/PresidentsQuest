@@ -12,14 +12,14 @@ def make_board():
         coordinates = {}
         board = white_house_map.readlines()
         for index_row, row in enumerate(board):
-            print("\t", end="")
+            # print("\t", end="")
             for index_room, room in enumerate(row):
-                if room in map_icons:
-                    print(f'{map_icons[room]}', end="")
+                # if room in map_icons:
+                #     print(f'{map_icons[room]}', end="")
                 if room != "\n":
                     coordinates[f'{index_row}:{index_room}'] = map_icons.get(room)
-            print()
-        print(coordinates)
+        #     print()
+        # print(coordinates)
         with open("coordinates.json", "w") as file_object:
             json.dump(coordinates, file_object)
 
