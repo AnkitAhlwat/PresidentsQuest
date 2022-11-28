@@ -6,7 +6,7 @@ def display_map(coordinates):
     print("Current map")
     position = 0
     for room, icons in coordinates.items():
-        print(icons, end="")
+        print(icons, end="`")
         position += 1
         if position == 8:
             print()
