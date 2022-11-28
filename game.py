@@ -4,12 +4,10 @@ Ankit Ahlwat / A01317232 / ankitahlwat
 Jas Randhawa / A01236951 / jasbcit
 """
 from get_user_choice import get_user_choice
-
+from make_board import make_board
 
 def game():
-    rows = 10
-    columns = 10
-    board = make_board(rows, columns)
+    board = make_board()
     character = make_character("Player Name")
     achieved_goal = False
     while not achieved_goal:
