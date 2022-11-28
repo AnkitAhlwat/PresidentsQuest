@@ -1,19 +1,24 @@
-from pick import pick
+import inquirer
 
 
-def get_user_choice():
+def get_user_choice(questiontype, prompt, choices):
+    # title = prompt
+    # options = choices
+    # enumerate_options = enumerate(options)
+    # option, index = pick(list(enumerate_options), title)
+    questions = [
+        inquirer.List(questiontype,
+                      message=prompt,
+                      choices=choices
+                      ),
+    ]
 
-    title = 'Please choose your favorite programming language: '
-    options = ['Java', 'JavaScript', 'Python', 'PHP', 'C++', 'Erlang', 'Haskell']
-    enumerate_options = enumerate(options)
-    option, index = pick(list(enumerate_options), title)
-
-    print(option)
-    print(index)
+    answers = inquirer.prompt(questions)
+    return answers[questiontype]
 
 
-def main():
-    get_user_choice()
+def main(questiontype=None, prompt=None, choices=None):
+    get_user_choice(questiontype, prompt, choices)
 
 
 if __name__ == "__main__":
