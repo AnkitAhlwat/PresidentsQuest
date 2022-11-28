@@ -8,6 +8,7 @@ def make_character(name):
         'Max HP': 5,
         'Money': 0,
         'Attack Points': 1,
+        'Visited Shop': False,
         'Items': None,
     }
     return character_dictionary
