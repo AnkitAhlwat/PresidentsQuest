@@ -17,7 +17,7 @@ def describe_current_location(current_location):
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
         print(room_description_dictionary[current_location])
-        get_user_choice(questiontype=None, prompt=None, choices=None, current_location=current_location)
+    get_user_choice("Decison","What would you like to do", ["Fight","Run","Examine"])
 
 
 def find_current_location(coordinates):
