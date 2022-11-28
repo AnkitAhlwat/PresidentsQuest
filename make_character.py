@@ -6,6 +6,7 @@ def make_character(name):
         'Level': 0,
         'Current HP': 5,
         'Max HP': 5,
+        'Attack Points': 1,
         'Items': None,
     }
     return character_dictionary
