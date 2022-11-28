@@ -1,30 +1,35 @@
 def make_board(columns, rows):
-    white_house_map = [[0, 1, 1, 1],
-                       [0, 1, 1, 1],
-                       [0, 0, 1],
+    white_house_map = [[[0, 1, 1, 1],
+                       [0, 1, 1, 1]],
+
+                       [[0, 0, 1],
                        [0, 0, 1, 0, 0, 1, 1, 0],
                        [0, 0, 1, 0, 0, 1, 0, 0],
                        [0, 0, 1, 0, 0, 1, 0, 0],
-                       [0, 1, 1, 1, 1, 1, 0, 0],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
+                       [0, 1, 1, 1, 1, 1, 0, 0]],
+
+                       [[0, 0, 1, 0, 0, 0, 0, 0],
                        [0, 0, 1, 0, 0, 1, 1, 1],
                        [0, 0, 1, 0, 0, 1, 1, 1],
                        [0, 1, 1, 1, 1, 1, 1, 1],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
-                       [0, 0, 1, 0, 0, 0, 0, 0],
+                       [0, 0, 1, 0, 0, 0, 0, 0]],
+
+                       [[0, 0, 1, 0, 0, 0, 0, 0],
                        [0, 1, 1, 1, 0, 1, 1, 1],
                        [1, 1, 1, 1, 1, 1, 1, 1],
                        [0, 1, 1, 1, 0, 1, 1, 1],
-                       [0, 0, 1, 0]]
-
-    for row in white_house_map:
-        print("\t", end="")
-        for room in row:
-            if room == 1:
-                print("[]", end="")
-            else:
-                print("  ", end="")
+                       [0, 0, 1, 0]]]
+    for level in white_house_map:
+        print("This is another level")
         print()
+        for row in level:
+            print("\t", end="")
+            for room in row:
+                if room == 1:
+                    print("[]", end="")
+                else:
+                    print("  ", end="")
+            print()
 
 
 def main():
