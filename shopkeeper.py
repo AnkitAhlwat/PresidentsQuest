@@ -1,115 +1,166 @@
 from get_user_choice import get_user_choice
 
 
+def format_weapons_list(list_item):
+    mapped_list = []
+
+    for item in list_item:
+        child_list = item[0] + " | " + "Cost: " + str(item[1]) + " | " + "Attack Gained: " + str(item[2])
+        mapped_list.append(child_list)
+
+    return mapped_list
+
+
+def format_food_list(list_item):
+    mapped_list = []
+
+    for item in list_item:
+        child_list = item[0] + " | " + "Cost: " + str(item[1]) + " | " + "Health Gained: " + str(item[2])
+        mapped_list.append(child_list)
+
+    return mapped_list
+
+
+def add_to_inventory(item, player):
+    player["Items"].append(item)
+    return
+
+
+def adjust_player_attack(item, player):
+    player['Attack Points'] += item
+    return
+
+
+def adjust_player_health(item, player):
+    if item >= player['Max HP']:
+        player['Current HP'] = player['Max HP']
+    else:
+        player['Current HP'] += item
+    if player['Current HP'] > player['Max HP']:
+        player['Current HP'] = player['Max HP']
+    return
+
+
+def buy_item(item_type, selected_item, player):
+    if int(player["Money"]) >= int(selected_item[1].replace("Cost: ", "")):
+        player["Money"] = int(player["Money"]) - int(selected_item[1].replace("Cost: ", ""))
+        if item_type == 'weapon':
+            add_to_inventory(selected_item[0], player)
+            adjust_player_attack(int(selected_item[2].replace("Attack Gained: ", "")), player)
+        else:
+            adjust_player_health(int(selected_item[2].replace("Health Gained: ", "")), player)
+        return True
+    else:
+        return False
+
+
 def shopkeeper(player):
     weapons_dictionary = {
-        "The President's Coffee Mug": {
-            'User Level Required': 1,
-            'Weapon Cost': 1,
-            'Attack Gain': 1
-        },
-        'Republican Hat': {
-            'User Level Required': 1,
-            'Weapon Cost': 1,
-            'Attack Gain': 1
-        },
-        'Democrat Hat': {
-            'User Level Required': 1,
-            'Weapon Cost': 1,
-            'Attack Gain': 1
-        },
-        'Bible': {
-            'User Level Required': 1,
-            'Weapon Cost': 5,
-            'Attack Gain': 5
-        },
-        'Unfinished Memo to Justin Trudeau': {
-            'User Level Required': 2,
-            'Weapon Cost': 6,
-            'Attack Gain': 8
-        },
-        'Presidential Pen': {
-            'User Level Required': 2,
-            'Weapon Cost': 10,
-            'Attack Gain': 12
-        },
-        'Painting of Abraham Lincoln': {
-            'User Level Required': 2,
-            'Weapon Cost': 12,
-            'Attack Gain': 15
-        },
-        'Seized Documents from Mar-a-Lago': {
-            'User Level Required': 2,
-            'Weapon Cost': 15,
-            'Attack Gain': 22
-        },
-        'Bald Eagle': {
-            'User Level Required': 3,
-            'Weapon Cost': 20,
-            'Attack Gain': 50
-        },
-        'The Constitution': {
-            'User Level Required': 3,
-            'Weapon Cost': 40,
-            'Attack Gain': 80
-        },
+        1:
+            ["The President's Coffee Mug", 1, 1],
+        2:
+            ["Republican Hat", 1, 1],
+        3:
+            ["Democrat Hat", 1, 1],
+        4:
+            ["Bible", 5, 5],
+        5:
+            ["Unfinished Memo to Justin Trudeau", 6, 8],
+        6:
+            ["Presidential Pen", 10, 12],
+        7:
+            ["Painting of Abraham Lincoln", 12, 15],
+        8:
+            ["Seized Documents from Mar-a-Lago", 15, 22],
+        9:
+            ["Bald Eagle", 20, 50],
+        10:
+            ["The Constitution", 40, 80]
     }
+
     food_dictionary = {
-        "Bourbon": {
-            'Food Cost': 1,
-            'Health Recovered': 2
-        },
-        "Turkey": {
-            'Food Cost': 2,
-            'Health Recovered': 4
-        },
-        "Chicago-style Pizza": {
-            'Food Cost': 3,
-            'Health Recovered': 6
-        },
-        "Cheeseburger": {
-            'Food Cost': 4,
-            'Health Recovered': 7
-        },
-        "Philly Cheese Steak": {
-            'Food Cost': 5,
-            'Health Recovered': 10
-        },
-        "Nashville Hot Chicken": {
-            'Food Cost': 8,
-            'Health Recovered': 20
-        },
-        "Melania's Homemade Dinner from 2019": {
-            'Food Cost': 15,
-            'Health Recovered': 35
-        },
-        "Barack's Sandwich from 2015 ": {
-            'Food Cost': 25,
-            'Health Recovered': 100
-        },
+        1:
+            ["Bourbon", 1, 2],
+        2:
+            ["Turkey", 2, 4],
+        3:
+            ["Chicago-style Pizza", 3, 6],
+        4:
+            ["Cheeseburger", 4, 7],
+        5:
+            ["Philly Cheese Steak", 5, 10],
+        6:
+            ["Nashville Hot Chicken", 8, 20],
+        7:
+            ["Melania's Homemade Dinner from 2019", 15, 35],
+        8:
+            ["Barack's Sandwich from 2015", 25, 100]
     }
 
     if player["Visited Shop"]:
         print(f"Great to see you again, {player['Name']}!\n")
+        print(f"You currently have {player['Health Points']} HP and {player['Attack Points']} Attack Points.\n")
     else:
         print(f"Welcome to the White House Gift Shop, {player['Name']}.\n")
         print("Here you can purchase weapons to level up your attack points or purchase food to heal your health"
               "points.\n")
+        print(f"Your Stats:\n{player['Current HP']}/{player['Max HP']} HP     {player['Attack Points']} "
+              f"Attack Points    ${player['Money']}\n")
 
-    initial_selection = get_user_choice('shopchoice', "What would you like to do?", ['Buy Weapons', 'Buy Food',
-                                                                                     'Leave'])
+    in_the_shop = True
 
-    if initial_selection == 'Leave':
-        print("See ya later alligator!")
-    elif initial_selection == 'Buy Weapons':
-        weapons_bought = get_user_choice('weapons-choice', 'What weapons would you like to buy?',
-                                         weapons_dictionary.keys())
-    elif initial_selection == 'Buy Food':
-        food_bought = get_user_choice('food-choice', 'What food would you like to buy?', food_dictionary.keys())
+    while in_the_shop:
+        user_selection = get_user_choice('shopchoice', "What would you like to do?", ['Buy Weapons', 'Buy Food',
+                                                                                      'Leave'])
+        if user_selection == 'Leave':
+            in_the_shop = False
+            player['Visited Shop'] = True
+            print("\nThank you for visiting the shop!\n")
+            print(
+                f"You now have {player['Current HP']}/{player['Max HP']} HP and {player['Attack Points']} "
+                f"Attack Points.")
+            print(f"Remaining Balance: ${player['Money']}.\n")
+            print("Hope to see you soon...")
+
+        elif user_selection == 'Buy Weapons':
+            mapped_weapons_list = map(format_weapons_list, [weapons_dictionary.values()])
+            weapon_selected = get_user_choice('weapons-choice', 'What weapon would you like to buy?',
+                                              [child for item in mapped_weapons_list for child in item])
+
+            selected_item_as_list = weapon_selected.split(" | ")
+            can_user_buy_item = buy_item('weapon', selected_item_as_list, player)
+
+            if can_user_buy_item:
+                print(f"You bought {selected_item_as_list[0]}. A fine choice! \n")
+                print(f"You now have {player['Attack Points']} Attack Points.")
+                print(f"Remaining Balance: ${player['Money']}.\n")
+
+            else:
+                print(f"Sorry, you do not have enough money to purchase the {selected_item_as_list[0]}.")
+                print(f"Current Balance: ${player['Money']}.\n")
+
+        elif user_selection == 'Buy Food':
+            mapped_food_list = map(format_food_list, [food_dictionary.values()])
+            food_selected = get_user_choice('food-choice', 'What food would you like to buy?',
+                                            [child for item in mapped_food_list for child in
+                                             item])
+
+            selected_item_as_list = food_selected.split(" | ")
+            can_user_buy_item = buy_item('food', selected_item_as_list, player)
+
+            if can_user_buy_item:
+                print(f"You bought {selected_item_as_list[0]}. A fine choice! \n")
+                print(f"You now have {player['Current HP']}/{player['Max HP']} HP.")
+                print(f"Remaining Balance: ${player['Money']}.\n")
+
+            else:
+                print(f"Sorry, you do not have enough money to purchase the {selected_item_as_list[0]}.")
+                print(f"Current Balance: ${player['Money']}.")
 
 
-def main():
-    player = {'Name': 'Jas', 'Visited Shop': True, 'Gold': 0}
+def main(player=None):
+    # player = {'Name': 'Jas', 'Visited Shop': False, 'Money': 10, 'Items': [], 'Attack Points': 0, 'Current HP': 0,
+    #           'Max HP': 5}
     shopkeeper(player)
 
 
