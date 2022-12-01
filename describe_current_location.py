@@ -33,9 +33,11 @@ def update_current_location(y_coordinate, x_coordinate, direction):
             character_dictionary["X-coordinate"] = x_coordinate
         with open("character.json", "w") as file_object:
             json.dump(character_dictionary, file_object)
+        describe_current_location(y_coordinate, x_coordinate)
 
     else:
-        print("Tru again")
+        print("That is not a valid move try again")
+        describe_current_location(y_coordinate, x_coordinate)
 
 
 def describe_current_location(y_coordinate, x_coordinate):
