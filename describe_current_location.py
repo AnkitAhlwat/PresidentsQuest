@@ -1,4 +1,5 @@
 import json
+import os
 from get_user_choice import get_user_choice
 
 
@@ -41,6 +42,7 @@ def update_current_location(y_coordinate, x_coordinate, direction):
 
 
 def describe_current_location(y_coordinate, x_coordinate):
+    os.system("cls")
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
         print(room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
