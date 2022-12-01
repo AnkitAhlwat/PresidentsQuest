@@ -1,3 +1,4 @@
+import json
 def make_character(name, party):
     character_dictionary = {
         'Name': name,
@@ -12,11 +13,14 @@ def make_character(name, party):
         'Items': [],
         'Political Party': party
     }
+    with open("character.json", "w") as file_object:
+        json.dump(character_dictionary, file_object)
+
     return character_dictionary
 
 
 def main():
-    make_character(input("Name? "))
+    make_character("Ankit",party=None)
 
 
 if __name__ == "__main__":
