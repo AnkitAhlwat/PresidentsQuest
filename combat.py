@@ -4,6 +4,7 @@ from enemy import Enemy
 import json
 import random
 from make_character import make_character as character
+from colorama import Fore, Style
 
 
 def combat_opening_interaction(enemy, player):
@@ -32,10 +33,10 @@ def roll_die(sides):
 
 def check_health(player_hp, enemy_hp):
     if player_hp <= 0:
-        print("You died")
+        print(Fore.RED + "You died")
         return True
     elif enemy_hp <= 0:
-        print("You defeated the enemy!")
+        print(Fore.GREEN + "You defeated the enemy!")
         return True
     else:
         return False
@@ -87,7 +88,7 @@ def fight(enemy, player, difficulty):
         sleep(2)
         if player_roll >= player_roll_needed:
             enemy_hp -= player_attack
-            print("Your hit landed!")
+            print(Fore.GREEN + "Your hit landed!")
             if enemy_hp < 0:
                 print("The enemy has 0HP left.")
             else:
@@ -101,12 +102,13 @@ def fight(enemy, player, difficulty):
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
+            print(Style.RESET_ALL)
             break
 
         enemy_roll = roll_die(10)
         if enemy_roll >= enemy_roll_needed:
             player_hp -= enemy_attack
-            print("The enemy's hit landed!")
+            print(Fore.RED + "The enemy's hit landed!")
             if player_hp < 0:
                 print("You now have 0HP left.")
             else:
@@ -114,12 +116,13 @@ def fight(enemy, player, difficulty):
             print()
         else:
             player_hp += 0
-            print("The enemy's hit missed!")
+            print(Fore.RED + "The enemy's hit missed!")
             print()
         sleep(2)
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
+            print(Style.RESET_ALL)
             break
     return
 
