@@ -1,3 +1,5 @@
+import json
+
 from get_user_choice import get_user_choice
 
 
@@ -157,11 +159,14 @@ def shopkeeper(player):
                 print(f"Sorry, you do not have enough money to purchase the {selected_item_as_list[0]}.")
                 print(f"Current Balance: ${player['Money']}.")
 
-
+def setup_shopkeeper():
+    with open("character.json", "r") as file_object:
+        character_dictionary = json.load(file_object)
+        shopkeeper(character_dictionary)
 def main(player=None):
     # player = {'Name': 'Jas', 'Visited Shop': False, 'Money': 10, 'Items': [], 'Attack Points': 0, 'Current HP': 0,
     #           'Max HP': 5}
-    shopkeeper(player)
+    setup_shopkeeper()
 
 
 if __name__ == '__main__':
