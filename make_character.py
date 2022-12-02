@@ -11,7 +11,8 @@ def make_character(name, party):
         'Attack Points': 1,
         'Visited Shop': False,
         'Items': [],
-        'Political Party': party
+        'Political Party': party,
+        'Icons': "cmd"
     }
     with open("character.json", "w") as file_object:
         json.dump(character_dictionary, file_object)
