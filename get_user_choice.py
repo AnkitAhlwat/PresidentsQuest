@@ -1,5 +1,5 @@
 import inquirer
-
+import os
 
 def get_user_choice(questiontype, prompt, choices):
     # title = prompt
@@ -14,6 +14,7 @@ def get_user_choice(questiontype, prompt, choices):
     ]
 
     answers = inquirer.prompt(questions)
+    os.system('cls')
     return answers[questiontype]
 
 
