@@ -139,6 +139,13 @@ def combat(enemy, player, difficulty):
         return
 
 
+def setup_combat():
+    mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
+    with open("character.json", "r") as file_object:
+        player = json.load(file_object)
+    # player['Items'] = "The Constitution"
+    combat(mike_pence, player, "Easy")
+
 def main():
     mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
     player = character('John', 'Republican')
