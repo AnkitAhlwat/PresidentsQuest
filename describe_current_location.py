@@ -22,7 +22,7 @@ def check_for_random_enemy():
     current_die = Die(10)
     dice_roll = current_die.roll_die()
     if dice_roll <= 2:
-        print("A random enemy politician!")
+        print("A wild enemy politician appeared!")
         setup_combat()
         find_current_location()
 
@@ -38,17 +38,22 @@ def is_valid_move(current_location):
 def update_current_location(y_coordinate, x_coordinate, direction):
     y_map = {"North": -1, "South": +1, "West": 0, "East": 0}
     x_map = {"West": -1, "East": +1, "North": 0, "South": 0}
+
     with open("coordinates.json", "r") as file_object:
         coordinates = json.load(file_object)
+
+    with open("character.json", "r") as file_object:
+        character_dictionary = json.load(file_object)
+
     if is_valid_move(f'{y_coordinate + y_map[direction]}:{x_coordinate + x_map[direction]}'):
         y_coordinate += y_map[direction]
         x_coordinate += x_map[direction]
-        with open("character.json", "r") as file_object:
-            character_dictionary = json.load(file_object)
-            coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[ ]"
-            character_dictionary["Y-coordinate"] = y_coordinate
-            character_dictionary["X-coordinate"] = x_coordinate
-            coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[X]"
+
+        coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[ ]"
+        character_dictionary["Y-coordinate"] = y_coordinate
+        character_dictionary["X-coordinate"] = x_coordinate
+        coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[X]"
+
         with open("character.json", "w") as file_object:
             json.dump(character_dictionary, file_object)
         with open("coordinates.json", "w") as file_object:
