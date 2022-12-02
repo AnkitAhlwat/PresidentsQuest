@@ -1,4 +1,6 @@
 import json
+
+
 def make_character(name, party):
     character_dictionary = {
         'Name': name,
@@ -11,8 +13,7 @@ def make_character(name, party):
         'Attack Points': 1,
         'Visited Shop': False,
         'Items': [],
-        'Political Party': party,
-        'Icons': "cmd"
+        'Political Party': party
     }
     with open("character.json", "w") as file_object:
         json.dump(character_dictionary, file_object)
@@ -21,7 +22,7 @@ def make_character(name, party):
 
 
 def main():
-    make_character("Ankit",party=None)
+    make_character("Ankit", party=None)
 
 
 if __name__ == "__main__":

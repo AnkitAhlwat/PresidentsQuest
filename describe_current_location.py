@@ -9,20 +9,14 @@ def display_map():
         coordinates = json.load(file_object)
     print("Current map")
 
-    with open("character.json","r") as file_object:
-        character_dictionary = json.load(file_object)
-        if character_dictionary["Icons"] == "cmd":
-            end_string = ""
-        else:
-            end_string = "`"
-
     position = 0
     for room, icons in coordinates.items():
-        print(icons, end=end_string)
+        print(icons, end="")
         position += 1
         if position == 8:
             print()
             position = 0
+
 
 def check_for_random_enemy():
     current_die = Die(10)
@@ -36,9 +30,10 @@ def check_for_random_enemy():
 def is_valid_move(current_location):
     with open("coordinates.json", "r") as file_object:
         coordinates = json.load(file_object)
-        if current_location not in coordinates or coordinates[current_location] == "⬛":
+        if current_location not in coordinates or coordinates[current_location] == "   ":
             return False
         return True
+
 
 def update_current_location(y_coordinate, x_coordinate, direction):
     y_map = {"North": -1, "South": +1, "West": 0, "East": 0}
