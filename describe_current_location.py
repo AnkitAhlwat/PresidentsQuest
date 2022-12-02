@@ -17,6 +17,10 @@ def display_map():
             print()
             position = 0
 
+def check_for_event():
+    with open("event.json", "r") as file_object:
+       pass
+
 
 def check_for_random_enemy():
     current_die = Die(10)
@@ -71,6 +75,7 @@ def describe_current_location(y_coordinate, x_coordinate):
         room_description_dictionary = json.load(file_object)
         print(room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
     check_for_random_enemy()
+    # check_for_event()
     direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South"])
     update_current_location(y_coordinate, x_coordinate, direction)
 
