@@ -134,7 +134,6 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
-        describe_current_location.setup_current_location()
     else:
         describe_current_location.setup_current_location()
 
