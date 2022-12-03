@@ -89,7 +89,7 @@ def describe_current_location(y_coordinate, x_coordinate):
     if direction == "Quit Game":
         confirmation =get_user_choice("Confirmation","Are you sure?",["No I want to play", "Yes"])
         if confirmation =="Yes":
-            return game.quit()
+            return quit()
         else:
             setup_current_location()
     update_current_location(y_coordinate, x_coordinate, direction)
