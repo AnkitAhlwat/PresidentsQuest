@@ -1,5 +1,5 @@
 import json
-from combat import setup_combat
+import combat
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
@@ -19,7 +19,8 @@ def display_map():
 
 def check_for_event():
     with open("event.json", "r") as file_object:
-       pass
+        event = json.load(file_object)
+        print(event[""])
 
 
 def check_for_random_enemy():
@@ -27,7 +28,7 @@ def check_for_random_enemy():
     dice_roll = current_die.roll_die()
     if dice_roll <= 2:
         print("A wild enemy politician appeared!")
-        setup_combat()
+        combat.setup_combat()
         find_current_location()
 
 
@@ -77,8 +78,8 @@ def describe_current_location(y_coordinate, x_coordinate):
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
         print(room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
-    check_for_random_enemy()
-    # check_for_event()
+    # check_for_random_enemy()
+    check_for_event()
     direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South"])
     update_current_location(y_coordinate, x_coordinate, direction)
 
@@ -92,12 +93,12 @@ def find_current_location():
         describe_current_location(y_coordinate, x_coordinate)
 
 
-def run():
+def setup_current_location():
     find_current_location()
 
 
 def main():
-    run()
+    setup_current_location()
 
 
 if __name__ == "__main__":
