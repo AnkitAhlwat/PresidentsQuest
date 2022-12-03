@@ -1,5 +1,6 @@
 import json
 import combat
+import shopkeeper
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
@@ -17,10 +18,14 @@ def display_map():
             print()
             position = 0
 
-def check_for_event():
+
+def check_for_event(coordinates):
     with open("event.json", "r") as file_object:
         event = json.load(file_object)
-        print(event[""])
+        event_function = event[coordinates]
+        print(event_function)
+        eval(f'{event_function}()')
+    return
 
 
 def check_for_random_enemy():
@@ -57,6 +62,7 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[ ]"
         character_dictionary["Y-coordinate"] = y_coordinate
         character_dictionary["X-coordinate"] = x_coordinate
+        check_for_event(coordinates[f'{y_coordinate}:{x_coordinate}'])
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = \
             Fore.BLUE + "[X]" + Style.RESET_ALL
 
@@ -78,8 +84,6 @@ def describe_current_location(y_coordinate, x_coordinate):
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
         print(room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
-    # check_for_random_enemy()
-    check_for_event()
     direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South"])
     update_current_location(y_coordinate, x_coordinate, direction)
 
