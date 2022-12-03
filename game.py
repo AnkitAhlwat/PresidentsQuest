@@ -9,24 +9,17 @@ from make_character import make_character
 from describe_current_location import *
 def game():
     board = make_board()
-    character = make_character("Player Name")
+    character = make_character("Player Name", "Republican")
     achieved_goal = False
+    escape = False
     while not achieved_goal:
-        run()
-        direction = get_user_choice()
-        valid_move = validate_move(board, character, direction)
-        if valid_move:
-            move_character(character)
-            describe_current_location(board, character)
-            there_is_a_challenge = check_for_challenges()
-            if there_is_a_challenge:
-                execute_challenge_protocol(character)
-                if character_has_leveled():
-                    execute_glow_up_protocol()
-                achieved_goal = check_if_goal_attained(board, character)
-        else:
-            pass
+        setup_current_location()
+        # if character_has_leveled():
+        #     execute_glow_up_protocol()
+        # achieved_goal = check_if_goal_attained(board, character)
 
+def quit():
+    return
 
 def main():
     game()
