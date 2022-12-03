@@ -1,1 +1,1 @@
-{"   ": null, "[ ]": "check_for_random_enemy", "[S]": "shopkeeper.setup_shopkeeper", "[B]": "combat.setup_boss", "[E]": "combat.setup_combat", "!": "[!]", "?": "[?]", "K": "[K]", "[o]": null}
+{"   ": null, "[ ]": "check_for_random_enemy", "[S]": "shopkeeper.setup_shopkeeper", "[B]": "combat.setup_boss", "[E]": "combat.setup_combat", "[!]": "locked_door.check_inventory_for_key", "[?]": "[?]", "[K]": "[K]", "[o]": null}

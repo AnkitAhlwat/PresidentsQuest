@@ -1,1 +1,1 @@
-{"Name": "John", "X-coordinate": 1, "Y-coordinate": 14, "Level": 0, "Current HP": 5, "Max HP": 5, "Money": 30, "Attack Points": 311, "Visited Shop": true, "Items": ["Presidential Pen", "The Constitution", "Bald Eagle", "Bald Eagle", "Bald Eagle", "The Constitution"], "Political Party": "Republican"}
+{"Name": "Player Name", "X-coordinate": 2, "Y-coordinate": 16, "Level": 0, "Current HP": 5, "Max HP": 5, "Money": 0, "Attack Points": 1, "Visited Shop": false, "Items": [], "Political Party": "Republican"}
