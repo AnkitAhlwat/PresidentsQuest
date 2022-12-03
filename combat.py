@@ -8,15 +8,28 @@ import describe_current_location
 from colorama import Fore, Style
 
 
+def second_chance(player):
+    print()
+    print("Oh no, you died... However, the House Speaker has decided to give you a second chance if you're lucky.\n")
+    sleep(1)
+    print(Fore.MAGENTA + "House Speaker has entered the room.\n" + Style.RESET_ALL)
+    sleep(1)
+    print(
+        Fore.MAGENTA + player["Name"] + ", I will roll one die and then you will roll one die. If you roll higher than"
+                                        "me, I will bring you back to life. Deal?" + Style.RESET_ALL)
+    user_input = get_user_choice("Decision", "What do you say?", ["Roll Die", "No I'd Rather Die"])
 
-def second_chance():
-    print("The House Speaker has decided to give you a second chance if you're lucky.\n")
-    second_chance_die = Die(6)
-    user_input = get_user_choice("Decision", "Try your luck?", ["Roll die", "No I rather die"])
-    if user_input == "Roll die":
-        if second_chance_die.roll_die() == 6:
-            print("You rolled a Nat 20! The speaker decided to spare your life")
-            describe_current_location.setup_current_location()
+    if user_input == "Roll Die":
+        house_speaker_die = Die(6)
+        house_speaker_roll = house_speaker_die.roll_die()
+        print(Fore.MAGENTA + "I have rolled a " + str(house_speaker_roll) + "." + Style.RESET_ALL)
+        sleep(3)
+        player_die = Die(6)
+        player_roll = player_die.roll_die()
+        print("You rolled a " + str(player_roll) + ".")
+        if player_roll > house_speaker_roll:
+            print(Fore.MAGENTA + "Congratulations, I will give you your life back. Albeit at a cost..." +
+                  Style.RESET_ALL)
         else:
             print("You are unfortunately not lucky")
             sleep(2)
@@ -73,7 +86,7 @@ def check_player_inventory(enemy, player):
         if player["Items"].count("Bald Eagle") >= 1:
             return True
         else:
-            print(Fore.RED +enemy.name + ": You don't have a Bald Eagle on you... I pity your very existence!"+
+            print(Fore.RED + enemy.name + ": You don't have a Bald Eagle on you... I pity your very existence!" +
                   Style.RESET_ALL)
             sleep(4)
             return False
@@ -120,7 +133,7 @@ def fight(enemy, player, difficulty):
             print()
         else:
             enemy_hp += 0
-            print(Fore.GREEN +"Your hit missed!"+ Style.RESET_ALL)
+            print(Fore.GREEN + "Your hit missed!" + Style.RESET_ALL)
             print()
         sleep(2)
 
@@ -146,10 +159,11 @@ def fight(enemy, player, difficulty):
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
-            second_chance()
+            second_chance(player)
             print(Style.RESET_ALL)
             break
     return
+
 
 def combat(enemy, player, difficulty):
     print(combat_opening_interaction(enemy, player))
@@ -184,6 +198,8 @@ def setup_boss():
         level_three_boss = Enemy(republican_boss[2], "Boss", 1, 10, 4)
 
     combat(level_one_boss, player, "Hard")
+
+
 def setup_combat():
     mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
     with open("character.json", "r") as file_object:
