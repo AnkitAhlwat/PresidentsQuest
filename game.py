@@ -19,7 +19,7 @@ def game():
 
 def main():
     try:
-        with open("characters.json", "r"):
+        with open("character.json", "r"):
             print("Welcome back")
     except FileNotFoundError:
         make_board()
