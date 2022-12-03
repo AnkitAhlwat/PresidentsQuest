@@ -9,8 +9,8 @@ class Die:
         self.number_of_sides = number_of_sides
 
     def get_face_value(self):
-        """Print the face value"""
-        print(self.face_value)
+        """Return the face value of the die"""
+        return self.face_value
 
     def set_size(self, new_size):
         """Set the new size of the die"""
