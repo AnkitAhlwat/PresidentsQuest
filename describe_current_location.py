@@ -2,7 +2,6 @@ import json
 import combat
 import game
 import shopkeeper
-import locked_door
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
