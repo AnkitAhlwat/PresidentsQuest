@@ -7,6 +7,8 @@ def make_character(name, party):
         'X-coordinate': 2,
         'Y-coordinate': 16,
         'Level': 1,
+        'XP': 0,
+        'XP Needed to Level Up': 10,
         'Current HP': 5,
         'Max HP': 5,
         'Money': 0,
