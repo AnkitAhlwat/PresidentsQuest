@@ -1,5 +1,5 @@
 import json
-
+import describe_current_location
 from get_user_choice import get_user_choice
 
 
@@ -126,6 +126,7 @@ def shopkeeper(player):
             print(f"Remaining Balance: ${player['Money']}.\n")
             print("Hope to see you soon...")
             update_player(player)
+            describe_current_location.setup_current_location()
 
 
         elif user_selection == 'Buy Weapons':
