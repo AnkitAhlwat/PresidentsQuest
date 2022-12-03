@@ -7,9 +7,8 @@ def make_events():
                             "[S]": "shopkeeper.setup_shopkeeper",
                             "[B]": "combat.setup_boss",
                             "[E]": "combat.setup_combat",
-                            "[!]": "locked_door.check_inventory_for_key",
                             "[?]": "[?]",
-                            "[K]": "[K]",
+                            "[K]": "chest.open",
                             "[o]": None
                             }
         json.dump(event_dictionary, file_object)
@@ -20,7 +19,6 @@ def make_board():
         "S": "[S]",
         "B": "[B]",
         "E": "[E]",
-        "!": "[!]",
         "?": "[?]",
         "K": "[K]",
         "o": "[o]"
