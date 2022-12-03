@@ -3,7 +3,6 @@ from time import sleep
 from enemy import Enemy
 import json
 import random
-from make_character import make_character as character
 from colorama import Fore, Style
 
 
@@ -126,7 +125,6 @@ def fight(enemy, player, difficulty):
             break
     return
 
-
 def combat(enemy, player, difficulty):
     print(combat_opening_interaction(enemy, player))
     print()
@@ -139,6 +137,26 @@ def combat(enemy, player, difficulty):
         return
 
 
+def setup_boss():
+    with open("character.json", "r") as file_object:
+        player = json.load(file_object)
+
+    with open("character.json", "r") as file_object:
+        character_dictionary = json.load(file_object)
+        party = character_dictionary["Political Party"]
+
+    democrat_boss = ["Alexandria Ocasio-Cortez", "Bernie Sanders", "Joe Biden"]
+    republican_boss = ["Ted Cruz", "George W. Bush", "Donald Trump"]
+    if party == "Republican":
+        level_one_boss = Enemy(democrat_boss[0], "Boss", 1, 10, 4)
+        level_two_boss = Enemy(democrat_boss[1], "Boss", 1, 10, 4)
+        level_three_boss = Enemy(democrat_boss[2], "Boss", 1, 10, 4)
+    else:
+        level_one_boss = Enemy(republican_boss[0], "Boss", 1, 10, 4)
+        level_two_boss = Enemy(republican_boss[1], "Boss", 1, 10, 4)
+        level_three_boss = Enemy(republican_boss[2], "Boss", 1, 10, 4)
+
+    combat(level_one_boss, player, "Medium")
 def setup_combat():
     mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
     with open("character.json", "r") as file_object:
@@ -146,11 +164,13 @@ def setup_combat():
     # player['Items'] = "The Constitution"
     combat(mike_pence, player, "Easy")
 
+
 def main():
+    setup_boss()
     mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
-    player = character('John', 'Republican')
+    # player = character('John', 'Republican')
     # player['Items'] = "The Constitution"
-    combat(mike_pence, player, "Easy")
+    # combat(mike_pence, player, "Easy")
 
 
 if __name__ == '__main__':
