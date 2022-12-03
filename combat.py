@@ -3,12 +3,15 @@ from time import sleep
 from enemy import Enemy
 import json
 import random
+import make_character
 from die import Die
 import describe_current_location
 from colorama import Fore, Style
 
 
 def second_chance(player):
+    with open("character.json", "r") as file_object:
+        character_dictionary = json.load(file_object)
     print()
     print("Oh no, you died... However, the House Speaker has decided to give you a second chance if you're lucky.\n")
     sleep(4)
@@ -33,15 +36,14 @@ def second_chance(player):
             sleep(2)
             print("You're health has been reduced to 1 and you are sent back to the previous room.")
             sleep(3)
-            with open("character.json", "r") as file_object:
-                character_dictionary = json.load(file_object)
-                character_dictionary["Current HP"] = 1
+            character_dictionary["Current HP"] = 1
             with open("character.json", "w") as file_object:
                 json.dump(character_dictionary, file_object)
-                describe_current_location.setup_current_location()
+            describe_current_location.setup_current_location()
         else:
             print("Unfortunately you weren't so lucky. It was nice knowing you Mr.President-Who-Never-Was.")
-            sleep(2)
+            make_character.make_character(f'{character_dictionary["Name"]}',
+                                          f'{character_dictionary["Political Party"]}')
             quit()
     else:
         quit()
