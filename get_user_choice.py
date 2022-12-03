@@ -1,5 +1,6 @@
 import inquirer
 import os
+import platform
 
 def get_user_choice(questiontype, prompt, choices):
     # title = prompt
@@ -14,7 +15,10 @@ def get_user_choice(questiontype, prompt, choices):
     ]
 
     answers = inquirer.prompt(questions)
-    os.system('cls')
+    if platform.system() =="Darwin":
+        os.system("clear")
+    else:
+        os.system('cls')
     return answers[questiontype]
 
 

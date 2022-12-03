@@ -5,6 +5,7 @@ import shopkeeper
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
+from time import sleep
 
 
 def display_map():
@@ -74,7 +75,8 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         describe_current_location(y_coordinate, x_coordinate)
 
     else:
-        print("That is not a valid move try again")
+        print(Fore.RED + "That is not a valid move try again" + Style.RESET_ALL+ "\n")
+        sleep(1.5)
         describe_current_location(y_coordinate, x_coordinate)
 
 
