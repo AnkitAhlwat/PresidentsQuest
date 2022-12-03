@@ -18,9 +18,6 @@ def game():
         #     execute_glow_up_protocol()
         # achieved_goal = check_if_goal_attained(board, character)
 
-def quit():
-    return
-
 def main():
     game()
 

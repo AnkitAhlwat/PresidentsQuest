@@ -1,14 +1,17 @@
 import json
 import combat
+import game
 import shopkeeper
+import locked_door
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
 
+
 def display_map():
     with open("coordinates.json") as file_object:
         coordinates = json.load(file_object)
-    print("Current map")
+    print(Fore.MAGENTA + "Current map" + Style.RESET_ALL + "\n")
 
     position = 0
     for room, icons in coordinates.items():
@@ -23,7 +26,6 @@ def check_for_event(coordinates):
     with open("event.json", "r") as file_object:
         event = json.load(file_object)
         event_function = event[coordinates]
-        print(event_function)
         eval(f'{event_function}()')
     return
 
@@ -66,8 +68,6 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = \
             Fore.BLUE + "[X]" + Style.RESET_ALL
 
-
-
         with open("character.json", "w") as file_object:
             json.dump(character_dictionary, file_object)
         with open("coordinates.json", "w") as file_object:
@@ -83,13 +83,19 @@ def describe_current_location(y_coordinate, x_coordinate):
     display_map()
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
-        print(room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
-    direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South"])
+        print("\n" + room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
+    direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South",
+                                                                           "Quit Game"])
+    if direction == "Quit Game":
+        confirmation =get_user_choice("Confirmation","Are you sure?",["No I want to play", "Yes"])
+        if confirmation =="Yes":
+            return game.quit()
+        else:
+            setup_current_location()
     update_current_location(y_coordinate, x_coordinate, direction)
 
 
 def find_current_location():
-    print("Current location")
     with open("character.json", "r") as file_object:
         character_dictionary = json.load(file_object)
         x_coordinate = character_dictionary["X-coordinate"]
