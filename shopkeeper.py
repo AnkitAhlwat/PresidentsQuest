@@ -22,7 +22,9 @@ def format_food_list(list_item):
 
     return mapped_list
 
-
+def update_player(player):
+    with open("character.json", "w") as file_object:
+        json.dump(player,file_object)
 def add_to_inventory(item, player):
     player["Items"].append(item)
     return
@@ -101,7 +103,7 @@ def shopkeeper(player):
 
     if player["Visited Shop"]:
         print(f"Great to see you again, {player['Name']}!\n")
-        print(f"You currently have {player['Health Points']} HP and {player['Attack Points']} Attack Points.\n")
+        print(f"You currently have {player['Current HP']} HP and {player['Attack Points']} Attack Points.\n")
     else:
         print(f"Welcome to the White House Gift Shop, {player['Name']}.\n")
         print("Here you can purchase weapons to level up your attack points or purchase food to heal your health"
@@ -123,6 +125,8 @@ def shopkeeper(player):
                 f"Attack Points.")
             print(f"Remaining Balance: ${player['Money']}.\n")
             print("Hope to see you soon...")
+            update_player(player)
+
 
         elif user_selection == 'Buy Weapons':
             mapped_weapons_list = map(format_weapons_list, [weapons_dictionary.values()])
@@ -160,9 +164,10 @@ def shopkeeper(player):
                 print(f"Current Balance: ${player['Money']}.")
 
 def setup_shopkeeper():
-    with open("character.json", "r") as file_object:
-        character_dictionary = json.load(file_object)
-        shopkeeper(character_dictionary)
+    with open("character.json", "r+") as file_object:
+        player = json.load(file_object)
+        shopkeeper(player)
+
 def main(player=None):
     # player = {'Name': 'Jas', 'Visited Shop': False, 'Money': 10, 'Items': [], 'Attack Points': 0, 'Current HP': 0,
     #           'Max HP': 5}
