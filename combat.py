@@ -15,7 +15,7 @@ def second_chance(player):
     print(Fore.MAGENTA + "House Speaker has entered the room.\n" + Style.RESET_ALL)
     sleep(1)
     print(
-        Fore.MAGENTA + player["Name"] + ", I will roll one die and then you will roll one die. If you roll higher than"
+        Fore.MAGENTA + player["Name"] + ", I will roll one die and then you will roll one die. If you roll higher than "
                                         "me, I will bring you back to life. Deal?" + Style.RESET_ALL)
     user_input = get_user_choice("Decision", "What do you say?", ["Roll Die", "No I'd Rather Die"])
 
@@ -31,7 +31,7 @@ def second_chance(player):
             print(Fore.MAGENTA + "Congratulations, I will give you your life back. Albeit at a cost..." +
                   Style.RESET_ALL)
         else:
-            print("You are unfortunately not lucky")
+            print("Unfortunately you weren't so lucky. It was nice knowing you Mr.President-Who-Never-Was.")
             sleep(2)
             quit()
     else:
