@@ -8,7 +8,7 @@ def make_events():
                             "[B]": "combat.setup_boss",
                             "[E]": "combat.setup_combat",
                             "[?]": "[?]",
-                            "[C]": "chest.open"
+                            "[C]": "chest.open_loot"
                             }
         json.dump(event_dictionary, file_object)
 def make_board():
