@@ -7,7 +7,7 @@ from colorama import Fore, Style
 from time import sleep
 
 
-def run_totaly_cool_celebration_protocol():
+def run_totally_cool_celebration_protocol():
     print("What did you expect a cool celebration or something? Scram kid your the president now go do some work")
     quit()
 
@@ -16,7 +16,7 @@ def check_if_goal_achieved():
     with open("character.json", "r") as file_object:
         character_dictionary = json.load(file_object)
         if character_dictionary["Achieved Goal"]:
-            run_totaly_cool_celebration_protocol()
+            run_totally_cool_celebration_protocol()
 
 
 def display_map():
@@ -120,8 +120,10 @@ def find_current_location():
 def setup_current_location():
     find_current_location()
 
+
 def setup_game():
     setup_current_location()
+
 
 def main():
     setup_current_location()
