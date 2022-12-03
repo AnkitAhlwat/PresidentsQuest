@@ -4,8 +4,8 @@ import json
 def make_character(name, party):
     character_dictionary = {
         'Name': name,
-        'X-coordinate': 0,
-        'Y-coordinate': 0,
+        'X-coordinate': 2,
+        'Y-coordinate': 16,
         'Level': 0,
         'Current HP': 5,
         'Max HP': 5,
