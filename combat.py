@@ -85,6 +85,7 @@ def check_health(player_hp, enemy_hp):
     if player_hp <= 0:
         print(Fore.RED + "You died")
         second_chance(player)
+        run_game.setup_current_location()
         return True
     elif enemy_hp <= 0:
         print(Fore.GREEN + "You defeated the enemy!")
@@ -102,6 +103,7 @@ def check_player_inventory(enemy, player):
                   Style.RESET_ALL)
             sleep(4)
             return False
+
     elif enemy.name == "George W. Bush" or enemy.name == "Bernie Sanders":
         if player["Items"].count("Bald Eagle") >= 1:
             return True
@@ -110,6 +112,7 @@ def check_player_inventory(enemy, player):
                   Style.RESET_ALL)
             sleep(4)
             return False
+
     elif enemy.name == "Ted Cruz" or enemy.name == "Alexandria Ocasio-Cortez":
         if player["Items"].count("Presidential Pen") >= 1:
             return True
@@ -118,6 +121,7 @@ def check_player_inventory(enemy, player):
                   Style.RESET_ALL)
             sleep(4)
             return False
+
     else:
         return True
 
@@ -242,7 +246,7 @@ def fight(enemy, player, difficulty):
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
             print(Style.RESET_ALL)
-            update_money_and_xp(enemy, player)
+            update_money_and_xp(enemy, enemy_hp, player)
             break
     return
 
@@ -255,7 +259,9 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
+        else:
             run_game.setup_current_location()
+
     else:
         run_game.setup_current_location()
 
