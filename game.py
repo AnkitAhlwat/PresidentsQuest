@@ -3,7 +3,6 @@ Ankit Ahlwat / A01317232 / ankitahlwat
 
 Jas Randhawa / A01236951 / jasbcit
 """
-from get_user_choice import get_user_choice
 from make_board import make_board
 from make_character import make_character
 from describe_current_location import *
