@@ -8,7 +8,7 @@ class Die:
         self.number_of_sides = number_of_sides
 
     def get_face_value(self):
-        return self.face_value
+        print(self.face_value)
 
     def set_size(self, new_size):
         if new_size > 0:
@@ -16,4 +16,4 @@ class Die:
 
     def roll_die(self):
         self.face_value = random.randint(1, self.number_of_sides)
-        return self.face_value
+        return self.get_face_value()
