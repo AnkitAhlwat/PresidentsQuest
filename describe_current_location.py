@@ -2,7 +2,7 @@ import json
 from combat import setup_combat
 from get_user_choice import get_user_choice
 from die import Die
-
+from colorama import Fore, Style
 
 def display_map():
     with open("coordinates.json") as file_object:
@@ -56,7 +56,10 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[ ]"
         character_dictionary["Y-coordinate"] = y_coordinate
         character_dictionary["X-coordinate"] = x_coordinate
-        coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[X]"
+        coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = \
+            Fore.BLUE + "[X]" + Style.RESET_ALL
+
+
 
         with open("character.json", "w") as file_object:
             json.dump(character_dictionary, file_object)
