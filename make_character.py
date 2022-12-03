@@ -12,6 +12,7 @@ def make_character(name, party):
         'Money': 0,
         'Attack Points': 1,
         'Visited Shop': False,
+        'Achieved Goal': False,
         'Items': [],
         'Political Party': party
     }

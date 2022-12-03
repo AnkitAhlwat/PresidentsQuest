@@ -1,11 +1,22 @@
 import json
 import combat
-import game
 import shopkeeper
 from get_user_choice import get_user_choice
 from die import Die
 from colorama import Fore, Style
 from time import sleep
+
+
+def run_totaly_cool_celebration_protocol():
+    print("What did you expect a cool celebration or something? Scram kid your the president now go do some work")
+    quit()
+
+
+def check_if_goal_achieved():
+    with open("character.json", "r") as file_object:
+        character_dictionary = json.load(file_object)
+        if character_dictionary["Achieved Goal"]:
+            run_totaly_cool_celebration_protocol()
 
 
 def display_map():
@@ -33,7 +44,7 @@ def check_for_event(coordinates):
 def check_for_random_enemy():
     current_die = Die(10)
     dice_roll = current_die.roll_die()
-    if dice_roll <= 2:
+    if dice_roll <= 1:
         print("A wild enemy politician appeared!")
         combat.setup_combat()
         find_current_location()
@@ -75,7 +86,7 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         describe_current_location(y_coordinate, x_coordinate)
 
     else:
-        print(Fore.RED + "That is not a valid move try again" + Style.RESET_ALL+ "\n")
+        print(Fore.RED + "That is not a valid move try again" + Style.RESET_ALL + "\n")
         sleep(1.5)
         describe_current_location(y_coordinate, x_coordinate)
 
@@ -88,8 +99,8 @@ def describe_current_location(y_coordinate, x_coordinate):
     direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South",
                                                                            "Quit Game"])
     if direction == "Quit Game":
-        confirmation =get_user_choice("Confirmation","Are you sure?",["No I want to play", "Yes"])
-        if confirmation =="Yes":
+        confirmation = get_user_choice("Confirmation", "Are you sure?", ["No I want to play", "Yes"])
+        if confirmation == "Yes":
             return quit()
         else:
             setup_current_location()
@@ -99,15 +110,18 @@ def describe_current_location(y_coordinate, x_coordinate):
 def find_current_location():
     with open("character.json", "r") as file_object:
         character_dictionary = json.load(file_object)
+        if character_dictionary["Achieved Goal"]:
+            quit()
         x_coordinate = character_dictionary["X-coordinate"]
         y_coordinate = character_dictionary["Y-coordinate"]
-        # describe_current_location(y_coordinate, x_coordinate)
-        update_current_location(y_coordinate,x_coordinate,direction=None)
+        update_current_location(y_coordinate, x_coordinate, direction=None)
 
 
 def setup_current_location():
     find_current_location()
 
+def setup_game():
+    setup_current_location()
 
 def main():
     setup_current_location()

@@ -1,5 +1,5 @@
 import json
-import describe_current_location
+import run_game
 from get_user_choice import get_user_choice
 
 
@@ -22,9 +22,12 @@ def format_food_list(list_item):
 
     return mapped_list
 
+
 def update_player(player):
     with open("character.json", "w") as file_object:
-        json.dump(player,file_object)
+        json.dump(player, file_object)
+
+
 def add_to_inventory(item, player):
     player["Items"].append(item)
     return
@@ -126,8 +129,7 @@ def shopkeeper(player):
             print(f"Remaining Balance: ${player['Money']}.\n")
             print("Hope to see you soon...")
             update_player(player)
-            describe_current_location.setup_current_location()
-
+            run_game.setup_current_location()
 
         elif user_selection == 'Buy Weapons':
             mapped_weapons_list = map(format_weapons_list, [weapons_dictionary.values()])
@@ -164,14 +166,14 @@ def shopkeeper(player):
                 print(f"Sorry, you do not have enough money to purchase the {selected_item_as_list[0]}.")
                 print(f"Current Balance: ${player['Money']}.")
 
+
 def setup_shopkeeper():
     with open("character.json", "r+") as file_object:
         player = json.load(file_object)
         shopkeeper(player)
 
-def main(player=None):
-    # player = {'Name': 'Jas', 'Visited Shop': False, 'Money': 10, 'Items': [], 'Attack Points': 0, 'Current HP': 0,
-    #           'Max HP': 5}
+
+def main():
     setup_shopkeeper()
 
 

@@ -5,7 +5,7 @@ import json
 import random
 import make_character
 from die import Die
-import describe_current_location
+import run_game
 from colorama import Fore, Style
 
 
@@ -39,7 +39,7 @@ def second_chance(player):
             character_dictionary["Current HP"] = 1
             with open("character.json", "w") as file_object:
                 json.dump(character_dictionary, file_object)
-            describe_current_location.setup_current_location()
+            run_game.setup_current_location()
         else:
             print("Unfortunately you weren't so lucky. It was nice knowing you Mr.President-Who-Never-Was.")
             make_character.make_character(f'{character_dictionary["Name"]}',
@@ -184,9 +184,9 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
-        describe_current_location.setup_current_location()
+        run_game.setup_current_location()
     else:
-        describe_current_location.setup_current_location()
+        run_game.setup_current_location()
 
 
 def setup_boss():
