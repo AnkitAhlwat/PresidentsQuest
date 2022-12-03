@@ -3,6 +3,7 @@ from time import sleep
 from enemy import Enemy
 import json
 import random
+import describe_current_location
 from colorama import Fore, Style
 
 
@@ -133,8 +134,9 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
+        describe_current_location.setup_current_location()
     else:
-        return
+        describe_current_location.setup_current_location()
 
 
 def setup_boss():
