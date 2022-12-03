@@ -122,6 +122,67 @@ def check_player_inventory(enemy, player):
         return True
 
 
+def check_if_level_up(player):
+    player_level = player["Level"]
+
+    if player['XP'] >= player['XP Needed to Level Up']:
+        if player_level == 1:
+            player['Current HP'] += 15
+            player['Max HP'] += 15
+        if player_level == 2:
+            player['Current HP'] += 25
+            player['Max HP'] += 25
+        if player_level >= 3:
+            player['Current HP'] += 45
+            player['Max HP'] += 45
+        player["Level"] += 1
+        player['XP'] = 0
+        player['XP Needed to Level Up'] += 5
+        print(f"Congratulations, you levelled up! You now have a max HP of {player['Max HP']}.\n")
+        with open("character.json", 'w') as file_object:
+            json.dump(player, file_object)
+
+
+
+def update_money_and_xp(enemy, enemy_hp, player):
+    if enemy_hp <= 0 and enemy.level == 1:
+        rand_xp = random.randint(1, 3)
+        player['Money'] += random.randint(1, 5)
+        player['XP'] += rand_xp
+        print(rand_xp)
+        print(player['XP'])
+
+        # with open("character.json", 'r') as file_object:
+        #     var = json.load(file_object)
+        #     print(var)
+        print("Block 1 ran")
+    if enemy_hp <= 0 and enemy.level == 2:
+        player['Money'] += random.randint(10, 20)
+        player['XP'] += random.randint(3, 6)
+        # with open("character.json", 'w') as file_object:
+        #     json.dump(player, file_object)
+        # with open("character.json", 'r') as file_object:
+        #     var = json.load(file_object)
+        #     print(var)
+        print("Block 2 ran")
+    if enemy_hp <= 0 and enemy.level == 3:
+        player['Money'] += random.randint(30, 50)
+        player['XP'] += random.randint(6, 10)
+        # with open("character.json", 'w') as file_object:
+        #     json.dump(player, file_object)
+        # with open("character.json", 'r') as file_object:
+        #     var = json.load(file_object)
+        #     print(var)
+        print("Block 3 ran")
+
+    with open("character.json", 'w') as file_object:
+        json.dump(player, file_object)
+
+
+
+    check_if_level_up(player)
+
+
 def fight(enemy, player, difficulty):
     player_hp = player["Current HP"]
     player_attack = player["Attack Points"]
@@ -142,7 +203,7 @@ def fight(enemy, player, difficulty):
     while in_combat:
 
         player_roll = roll_die(10)
-        sleep(2)
+        sleep(1)
         if player_roll >= player_roll_needed:
             enemy_hp -= player_attack
             print(Fore.GREEN + "Your hit landed!")
@@ -155,11 +216,12 @@ def fight(enemy, player, difficulty):
             enemy_hp += 0
             print(Fore.GREEN + "Your hit missed!" + Style.RESET_ALL)
             print()
-        sleep(2)
+        sleep(1)
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
             print(Style.RESET_ALL)
+            update_money_and_xp(enemy, enemy_hp, player)
             break
 
         enemy_roll = roll_die(10)
@@ -175,11 +237,12 @@ def fight(enemy, player, difficulty):
             player_hp += 0
             print(Fore.RED + "The enemy's hit missed!" + Style.RESET_ALL)
             print()
-        sleep(2)
+        sleep(1)
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
             print(Style.RESET_ALL)
+            update_money_and_xp(enemy, player)
             break
     return
 
@@ -192,7 +255,7 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
-
+            run_game.setup_current_location()
     else:
         run_game.setup_current_location()
 
@@ -278,10 +341,6 @@ def setup_combat():
 
 def main():
     setup_boss()
-    mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
-    # player = character('John', 'Republican')
-    # player['Items'] = "The Constitution"
-    # combat(mike_pence, player, "Easy")
 
 
 if __name__ == '__main__':
