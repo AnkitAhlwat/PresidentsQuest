@@ -15,7 +15,8 @@ def second_chance():
     user_input = get_user_choice("Decision", "Try your luck?", ["Roll die", "No I rather die"])
     if user_input == "Roll die":
         if second_chance_die.roll_die() == 6:
-            print("Hi")
+            print("You rolled a Nat 20! The speaker decided to spare your life")
+            describe_current_location.setup_current_location()
         else:
             print("You are unfortunately not lucky")
             sleep(2)
