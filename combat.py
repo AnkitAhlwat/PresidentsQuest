@@ -11,25 +11,34 @@ from colorama import Fore, Style
 def second_chance(player):
     print()
     print("Oh no, you died... However, the House Speaker has decided to give you a second chance if you're lucky.\n")
-    sleep(1)
+    sleep(4)
     print(Fore.MAGENTA + "House Speaker has entered the room.\n" + Style.RESET_ALL)
-    sleep(1)
+    sleep(2)
     print(
         Fore.MAGENTA + player["Name"] + ", I will roll one die and then you will roll one die. If you roll higher than "
                                         "me, I will bring you back to life. Deal?" + Style.RESET_ALL)
     user_input = get_user_choice("Decision", "What do you say?", ["Roll Die", "No I'd Rather Die"])
 
     if user_input == "Roll Die":
-        house_speaker_die = Die(6)
+        house_speaker_die = Die(20)
         house_speaker_roll = house_speaker_die.roll_die()
         print(Fore.MAGENTA + "I have rolled a " + str(house_speaker_roll) + "." + Style.RESET_ALL)
         sleep(3)
-        player_die = Die(6)
+        player_die = Die(20)
         player_roll = player_die.roll_die()
         print("You rolled a " + str(player_roll) + ".")
         if player_roll > house_speaker_roll:
             print(Fore.MAGENTA + "Congratulations, I will give you your life back. Albeit at a cost..." +
                   Style.RESET_ALL)
+            sleep(2)
+            print("You're health has been reduced to 1 and you are sent back to the previous room.")
+            sleep(3)
+            with open("character.json", "r") as file_object:
+                character_dictionary = json.load(file_object)
+                character_dictionary["Current HP"] = 1
+            with open("character.json", "w") as file_object:
+                json.dump(character_dictionary, file_object)
+                describe_current_location.setup_current_location()
         else:
             print("Unfortunately you weren't so lucky. It was nice knowing you Mr.President-Who-Never-Was.")
             sleep(2)
