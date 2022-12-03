@@ -48,8 +48,8 @@ def is_valid_move(current_location):
 
 
 def update_current_location(y_coordinate, x_coordinate, direction):
-    y_map = {"North": -1, "South": +1, "West": 0, "East": 0}
-    x_map = {"West": -1, "East": +1, "North": 0, "South": 0}
+    y_map = {"North": -1, "South": +1, "West": 0, "East": 0, None: 0}
+    x_map = {"West": -1, "East": +1, "North": 0, "South": 0, None: 0}
 
     with open("coordinates.json", "r") as file_object:
         coordinates = json.load(file_object)
@@ -101,7 +101,8 @@ def find_current_location():
         character_dictionary = json.load(file_object)
         x_coordinate = character_dictionary["X-coordinate"]
         y_coordinate = character_dictionary["Y-coordinate"]
-        describe_current_location(y_coordinate, x_coordinate)
+        # describe_current_location(y_coordinate, x_coordinate)
+        update_current_location(y_coordinate,x_coordinate,direction=None)
 
 
 def setup_current_location():
