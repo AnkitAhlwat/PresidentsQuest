@@ -1,1 +1,1 @@
-{"Name": "Ankit", "X-coordinate": 2, "Y-coordinate": 15, "Level": 0, "Current HP": 5, "Max HP": 5, "Money": 0, "Attack Points": 1, "Visited Shop": false, "Items": [], "Political Party": "Republican"}
+{"Name": "John", "X-coordinate": 1, "Y-coordinate": 13, "Level": 0, "Current HP": 5, "Max HP": 5, "Money": 74, "Attack Points": 231, "Visited Shop": true, "Items": ["Presidential Pen", "The Constitution", "Bald Eagle", "Bald Eagle", "Bald Eagle"], "Political Party": "Republican"}

@@ -1,1 +1,1 @@
-{"   ": null, "[ ]": "check_for_random_enemy()", "[S]": "setup_shopkeeper()", "[B]": "setup_combat()", "[E]": "setup_combat()", "!": "[!]", "?": "[?]", "K": "[K]", "[o]": null}
+{"   ": null, "[ ]": "check_for_random_enemy()", "[S]": "setup_shopkeeper()", "[B]": "setup_boss()", "[E]": "setup_combat()", "!": "[!]", "?": "[?]", "K": "[K]", "[o]": null}
