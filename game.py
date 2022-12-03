@@ -24,8 +24,7 @@ def main():
     except FileNotFoundError:
         make_board()
         player_name = input("Please enter your name: ")
-        party_input = get_user_choice("Party","Please select your party", ["Democrat", "Republican"])
-        party = party_input
+        party = get_user_choice("Party","Please select your party", ["Democrat", "Republican"])
         make_character(player_name, party)
     game()
 

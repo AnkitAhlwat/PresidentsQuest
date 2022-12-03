@@ -8,8 +8,7 @@ def make_events():
                             "[B]": "combat.setup_boss",
                             "[E]": "combat.setup_combat",
                             "[?]": "[?]",
-                            "[K]": "chest.open",
-                            "[o]": None
+                            "[K]": "chest.open"
                             }
         json.dump(event_dictionary, file_object)
 def make_board():
@@ -20,8 +19,7 @@ def make_board():
         "B": "[B]",
         "E": "[E]",
         "?": "[?]",
-        "K": "[K]",
-        "o": "[o]"
+        "K": "[K]"
     }
     with open("white_house.txt", 'r') as white_house_map:
         coordinates = {}
