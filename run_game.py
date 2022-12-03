@@ -1,5 +1,6 @@
 import json
 import combat
+import chest
 import shopkeeper
 from get_user_choice import get_user_choice
 from die import Die
@@ -38,7 +39,7 @@ def check_for_event(coordinates):
         event = json.load(file_object)
         event_function = event[coordinates]
         eval(f'{event_function}()')
-    return
+
 
 
 def check_for_random_enemy():
