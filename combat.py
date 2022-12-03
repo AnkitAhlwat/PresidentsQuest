@@ -3,8 +3,25 @@ from time import sleep
 from enemy import Enemy
 import json
 import random
+from die import Die
 import describe_current_location
 from colorama import Fore, Style
+
+
+
+def second_chance():
+    print("The House Speaker has decided to give you a second chance if you're lucky.\n")
+    second_chance_die = Die(6)
+    user_input = get_user_choice("Decision", "Try your luck?", ["Roll die", "No I rather die"])
+    if user_input == "Roll die":
+        if second_chance_die.roll_die() == 6:
+            print("Hi")
+        else:
+            print("You are unfortunately not lucky")
+            sleep(2)
+            quit()
+    else:
+        quit()
 
 
 def combat_opening_interaction(enemy, player):
@@ -47,19 +64,25 @@ def check_player_inventory(enemy, player):
         if player["Items"].count("The Constitution") >= 1:
             return True
         else:
-            print(enemy.name + ": You don't have The Constitution on you... You're not worth my time!")
+            print(Fore.RED + enemy.name + ": You don't have The Constitution on you... You're not worth my time!" +
+                  Style.RESET_ALL)
+            sleep(4)
             return False
     elif enemy.name == "George W. Bush" or enemy.name == "Bernie Sanders":
         if player["Items"].count("Bald Eagle") >= 1:
             return True
         else:
-            print(enemy.name + ": You don't have a Bald Eagle on you... I pity your very existence!")
+            print(Fore.RED +enemy.name + ": You don't have a Bald Eagle on you... I pity your very existence!"+
+                  Style.RESET_ALL)
+            sleep(4)
             return False
     elif enemy.name == "Ted Cruz" or enemy.name == "Alexandria Ocasio-Cortez":
         if player["Items"].count("Presidential Pen") >= 1:
             return True
         else:
-            print(enemy.name + ": You don't have the Presidential Pen on you... Get out of my sight!")
+            print(Fore.RED + enemy.name + ": You don't have the Presidential Pen on you... Get out of my sight!" +
+                  Style.RESET_ALL)
+            sleep(4)
             return False
     else:
         return True
@@ -96,7 +119,7 @@ def fight(enemy, player, difficulty):
             print()
         else:
             enemy_hp += 0
-            print("Your hit missed!")
+            print(Fore.GREEN +"Your hit missed!"+ Style.RESET_ALL)
             print()
         sleep(2)
 
@@ -116,12 +139,13 @@ def fight(enemy, player, difficulty):
             print()
         else:
             player_hp += 0
-            print(Fore.RED + "The enemy's hit missed!")
+            print(Fore.RED + "The enemy's hit missed!" + Style.RESET_ALL)
             print()
         sleep(2)
 
         is_dead = check_health(player_hp, enemy_hp)
         if is_dead:
+            second_chance()
             print(Style.RESET_ALL)
             break
     return
@@ -134,6 +158,7 @@ def combat(enemy, player, difficulty):
         is_fight_valid = check_player_inventory(enemy, player)
         if is_fight_valid:
             fight(enemy, player, difficulty)
+        describe_current_location.setup_current_location()
     else:
         describe_current_location.setup_current_location()
 
@@ -157,7 +182,7 @@ def setup_boss():
         level_two_boss = Enemy(republican_boss[1], "Boss", 1, 10, 4)
         level_three_boss = Enemy(republican_boss[2], "Boss", 1, 10, 4)
 
-    combat(level_one_boss, player, "Medium")
+    combat(level_one_boss, player, "Hard")
 def setup_combat():
     mike_pence = Enemy("Mike Pence", "Minion", 1, 5, 2)
     with open("character.json", "r") as file_object:
