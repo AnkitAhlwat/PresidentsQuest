@@ -6,9 +6,9 @@ Jas Randhawa / A01236951 / jasbcit
 from make_board import make_board
 from make_character import make_character
 from describe_current_location import *
+
+
 def game():
-    make_board()
-    make_character("Player Name", "Republican")
     achieved_goal = False
     while not achieved_goal:
         setup_current_location()
@@ -16,7 +16,20 @@ def game():
         #     execute_glow_up_protocol()
         # achieved_goal = check_if_goal_attained(board, character)
 
+
 def main():
+    try:
+        with open("characters.json", "r"):
+            print("Welcome back")
+    except FileNotFoundError:
+        make_board()
+        player_name = input("Please enter your name")
+        party_input = get_user_choice("Party","Please select your party", ["Democrat", "Republican"])
+        if party_input == "1":
+            party = "Democrat"
+        else:
+            party = "Republican"
+        make_character(player_name, party)
     game()
 
 
