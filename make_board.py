@@ -1,17 +1,15 @@
 import json
-from describe_current_location import check_for_random_enemy
-from shopkeeper import setup_shopkeeper
-from combat import setup_combat
+
 def make_events():
     with open("event.json", "w") as file_object:
         event_dictionary = {"   ": None,
-                            "[ ]": check_for_random_enemy(),
-                            "[S]": setup_shopkeeper(),
-                            "[B]": setup_combat(),
-                            "[E]": setup_combat(),
-                            "!": "[!]",
-                            "?": "[?]",
-                            "K": "[K]",
+                            "[ ]": "check_for_random_enemy",
+                            "[S]": "shopkeeper.setup_shopkeeper",
+                            "[B]": "combat.setup_boss",
+                            "[E]": "combat.setup_combat",
+                            "[!]": "locked_door.check_inventory_for_key",
+                            "[?]": "[?]",
+                            "[K]": "[K]",
                             "[o]": None
                             }
         json.dump(event_dictionary, file_object)
@@ -36,6 +34,7 @@ def make_board():
                     coordinates[f'{index_row}:{index_room}'] = icons.get(room)
         with open("coordinates.json", "w") as file_object:
             json.dump(coordinates, file_object)
+    make_events()
 
 
 def main():
