@@ -10,8 +10,9 @@ from time import sleep
 
 def run_totally_cool_celebration_protocol():
     print("What did you expect a cool celebration or something? Scram kid your the president now go do some work")
-    sleep(2)
+    sleep(4)
     print("Im kidding, I would never speak that way to the new president\n")
+    sleep(2)
     print("""
            -=[ white house ]=-  1/99
 
@@ -137,7 +138,8 @@ def describe_current_location(y_coordinate, x_coordinate):
     display_map()
     with open("white_house_room_descriptions.json", "r") as file_object:
         room_description_dictionary = json.load(file_object)
-        print("\n" + room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
+        if f'{y_coordinate}:{x_coordinate}' in room_description_dictionary:
+            print("\n" + room_description_dictionary[f'{y_coordinate}:{x_coordinate}'])
     direction = get_user_choice("Decision", "Where would you like to go", ["North", "East", "West", "South",
                                                                            "Quit Game"])
     if direction == "Quit Game":
