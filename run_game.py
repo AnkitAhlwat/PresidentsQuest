@@ -58,6 +58,10 @@ def check_for_event(y_coordinate, x_coordinate):
                     combat.clear_enemy_icon(y_coordinate, x_coordinate)
                     eval(f'{event_function}()')
                 setup_current_location()
+            elif coordinates == "[-]":
+                combat.clear_enemy_icon(y_coordinate, x_coordinate)
+                eval(f'{event_function}()')
+                setup_current_location()
             else:
                 eval(f'{event_function}()')
 
