@@ -8,6 +8,8 @@ import make_character
 from die import Die
 import run_game
 from colorama import Fore, Style
+
+
 def clear_enemy_icon(y_coordinate,x_coordinate):
     with open("coordinates.json", "r") as file_object:
         coordinates = json.load(file_object)
@@ -255,14 +257,10 @@ def fight(enemy, player, difficulty):
 
 
 def combat(enemy, player, difficulty):
-    # print(combat_opening_interaction(enemy, player))
-    # print()
-    # user_choice = fight_or_leave()
-    # if user_choice == "Fight":
     is_fight_valid = check_player_inventory(enemy, player)
     if is_fight_valid:
         fight(enemy, player, difficulty)
-        run_game.setup_current_location()
+        # run_game.setup_current_location()
         return
     else:
         run_game.setup_current_location()
