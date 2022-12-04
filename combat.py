@@ -138,14 +138,14 @@ def check_if_level_up(player):
 
     if player['XP'] >= player['XP Needed to Level Up']:
         if player_level == 1:
+            player['Current HP'] += 5
+            player['Max HP'] += 5
+        if player_level == 2:
+            player['Current HP'] += 10
+            player['Max HP'] += 10
+        if player_level >= 3:
             player['Current HP'] += 15
             player['Max HP'] += 15
-        if player_level == 2:
-            player['Current HP'] += 25
-            player['Max HP'] += 25
-        if player_level >= 3:
-            player['Current HP'] += 45
-            player['Max HP'] += 45
         player["Level"] += 1
         player['XP'] = 0
         player['XP Needed to Level Up'] += 5
@@ -163,27 +163,18 @@ def update_money_and_xp(enemy, enemy_hp, player):
         print(rand_xp)
         print(player['XP'])
 
-        # with open("character.json", 'r') as file_object:
-        #     var = json.load(file_object)
-        #     print(var)
         print("Block 1 ran")
+
     if enemy_hp <= 0 and enemy.level == 2:
         player['Money'] += random.randint(10, 20)
         player['XP'] += random.randint(3, 6)
-        # with open("character.json", 'w') as file_object:
-        #     json.dump(player, file_object)
-        # with open("character.json", 'r') as file_object:
-        #     var = json.load(file_object)
-        #     print(var)
+
         print("Block 2 ran")
+
     if enemy_hp <= 0 and enemy.level == 3:
         player['Money'] += random.randint(30, 50)
         player['XP'] += random.randint(6, 10)
-        # with open("character.json", 'w') as file_object:
-        #     json.dump(player, file_object)
-        # with open("character.json", 'r') as file_object:
-        #     var = json.load(file_object)
-        #     print(var)
+
         print("Block 3 ran")
 
     with open("character.json", 'w') as file_object:
@@ -260,7 +251,6 @@ def combat(enemy, player, difficulty):
     is_fight_valid = check_player_inventory(enemy, player)
     if is_fight_valid:
         fight(enemy, player, difficulty)
-        # run_game.setup_current_location()
         return
     else:
         run_game.setup_current_location()
@@ -284,7 +274,7 @@ def setup_boss():
     print()
     user_choice = fight_or_leave()
     if user_choice == "Fight":
-        combat(boss, player, "Easy")
+        combat(boss, player, "Medium")
     else:
         run_game.setup_current_location()
 
