@@ -279,14 +279,16 @@ def setup_boss():
     democrat_boss = ["Alexandria Ocasio-Cortez", "Bernie Sanders", "Joe Biden"]
     republican_boss = ["Ted Cruz", "George W. Bush", "Donald Trump"]
     if party == "Republican":
-        boss = Enemy(democrat_boss[dungeon_level-1], "Boss", 1*dungeon_level, 10*dungeon_level, 4*dungeon_level)
+        boss = Enemy(democrat_boss[dungeon_level-1], "Boss", 1*dungeon_level, 30*dungeon_level, 10*dungeon_level)
     else:
-        boss = Enemy(republican_boss[dungeon_level], "Boss", 1*dungeon_level, 10*dungeon_level, 4*dungeon_level)
+        boss = Enemy(republican_boss[dungeon_level-1], "Boss", 1*dungeon_level, 30*dungeon_level, 10*dungeon_level)
     print(combat_opening_interaction(boss, player))
     print()
     user_choice = fight_or_leave()
     if user_choice == "Fight":
         combat(boss, player, "Easy")
+    else:
+        run_game.setup_current_location()
 
 
 def setup_combat():
