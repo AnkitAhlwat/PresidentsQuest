@@ -42,6 +42,7 @@ def check_for_event(coordinates):
 
 
 
+
 def check_for_random_enemy():
     current_die = Die(10)
     dice_roll = current_die.roll_die()
@@ -77,6 +78,7 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         character_dictionary["Y-coordinate"] = y_coordinate
         character_dictionary["X-coordinate"] = x_coordinate
         check_for_event(coordinates[f'{y_coordinate}:{x_coordinate}'])
+
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = \
             Fore.BLUE + "[X]" + Style.RESET_ALL
 
