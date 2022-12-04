@@ -10,12 +10,13 @@ import run_game
 from colorama import Fore, Style
 
 
-def clear_enemy_icon(y_coordinate,x_coordinate):
+def clear_enemy_icon(y_coordinate, x_coordinate):
     with open("coordinates.json", "r") as file_object:
         coordinates = json.load(file_object)
     coordinates[f'{y_coordinate}:{x_coordinate}'] = "[ ]"
     with open("coordinates.json", "w") as file_object:
         json.dump(coordinates, file_object)
+
 
 def second_chance(player):
     with open("character.json", "r") as file_object:
@@ -154,11 +155,10 @@ def check_if_level_up(player):
             json.dump(player, file_object)
 
 
-
 def update_money_and_xp(enemy, enemy_hp, player):
     if enemy_hp <= 0 and enemy.level == 1:
         rand_xp = random.randint(1, 3)
-        player['Money'] += random.randint(1, 5)
+        player['Money'] += random.randint(1, 4)
         player['XP'] += rand_xp
         print(rand_xp)
         print(player['XP'])
@@ -166,13 +166,13 @@ def update_money_and_xp(enemy, enemy_hp, player):
         print("Block 1 ran")
 
     if enemy_hp <= 0 and enemy.level == 2:
-        player['Money'] += random.randint(10, 20)
+        player['Money'] += random.randint(4, 8)
         player['XP'] += random.randint(3, 6)
 
         print("Block 2 ran")
 
     if enemy_hp <= 0 and enemy.level == 3:
-        player['Money'] += random.randint(30, 50)
+        player['Money'] += random.randint(10, 20)
         player['XP'] += random.randint(6, 10)
 
         print("Block 3 ran")
@@ -255,6 +255,7 @@ def combat(enemy, player, difficulty):
     else:
         run_game.setup_current_location()
 
+
 def setup_boss():
     with open("character.json", "r+") as file_object:
         player = json.load(file_object)
@@ -267,9 +268,11 @@ def setup_boss():
     democrat_boss = ["Alexandria Ocasio-Cortez", "Bernie Sanders", "Joe Biden"]
     republican_boss = ["Ted Cruz", "George W. Bush", "Donald Trump"]
     if party == "Republican":
-        boss = Enemy(democrat_boss[dungeon_level-1], "Boss", 1*dungeon_level, 30*dungeon_level, 10*dungeon_level)
+        boss = Enemy(democrat_boss[dungeon_level - 1], "Boss", 1 * dungeon_level, 30 * dungeon_level,
+                     10 * dungeon_level)
     else:
-        boss = Enemy(republican_boss[dungeon_level-1], "Boss", 1*dungeon_level, 30*dungeon_level, 10*dungeon_level)
+        boss = Enemy(republican_boss[dungeon_level - 1], "Boss", 1 * dungeon_level, 30 * dungeon_level,
+                     10 * dungeon_level)
     print(combat_opening_interaction(boss, player))
     print()
     user_choice = fight_or_leave()
@@ -287,25 +290,25 @@ def setup_combat():
         sarah_palin = Enemy("Sarah Palin", "Minion", 1, 3, 1)
         mike_pence = Enemy("Mike Pence", "Minion", 1, 3, 2)
 
-        rand_paul = Enemy("Rand Paul", "Minion", 2, 10, 4)
-        arnold_schwarzenegger = Enemy("Arnold Schwarzenegger", "Minion", 2, 3, 8)
-        jeb_bush = Enemy("Jeb Bush", "Minion", 2, 8, 5)
+        rand_paul = Enemy("Rand Paul", "Minion", 2, 25, 4)
+        arnold_schwarzenegger = Enemy("Arnold Schwarzenegger", "Minion", 2, 15, 8)
+        jeb_bush = Enemy("Jeb Bush", "Minion", 2, 30, 5)
 
-        mitt_romney = Enemy("Mitt Romney", "Minion", 3, 20, 12)
-        dick_cheney = Enemy("Dick Cheney", "Minion", 3, 15, 23)
-        nikki_haley = Enemy("Nikki Haley", "Minion", 3, 18, 17)
+        mitt_romney = Enemy("Mitt Romney", "Minion", 3, 50, 12)
+        dick_cheney = Enemy("Dick Cheney", "Minion", 3, 35, 23)
+        nikki_haley = Enemy("Nikki Haley", "Minion", 3, 45, 17)
 
         andrew_yang = Enemy("Andrew Yang", "Minion", 1, 3, 2)
         jimmy_carter = Enemy("Jimmy Carter", "Minion", 1, 1, 1)
         kamala_harris = Enemy("Kamala Harris", "Minion", 1, 2, 3)
 
-        beto_orourke = Enemy("Beto O'Rourke", "Minion", 2, 12, 6)
-        nancy_pelosi = Enemy("Nancy Pelosi", "Minion", 2, 14, 2)
-        al_gore = Enemy("Al Gore", "Minion", 2, 10, 8)
+        beto_orourke = Enemy("Beto O'Rourke", "Minion", 2, 24, 6)
+        nancy_pelosi = Enemy("Nancy Pelosi", "Minion", 2, 30, 2)
+        al_gore = Enemy("Al Gore", "Minion", 2, 15, 8)
 
-        barack_obama = Enemy("Barack Obama", "Minion", 3, 18, 28)
-        hilary_clinton = Enemy("Hilary Clinton", "Minion", 3, 20, 15)
-        bill_clinton = Enemy("Bill Clinton", "Minion", 3, 15, 20)
+        barack_obama = Enemy("Barack Obama", "Minion", 3, 50, 28)
+        hilary_clinton = Enemy("Hilary Clinton", "Minion", 3, 40, 25)
+        bill_clinton = Enemy("Bill Clinton", "Minion", 3, 25, 40)
 
         level_one_enemies_republican = [ben_carson, sarah_palin, mike_pence]
         level_two_enemies_republican = [rand_paul, arnold_schwarzenegger, jeb_bush]
