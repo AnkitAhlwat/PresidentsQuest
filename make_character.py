@@ -6,7 +6,7 @@ def make_character(name, party):
         'Name': name,
         'X-coordinate': 2,
         'Y-coordinate': 16,
-        'Dungeon Level': 0,
+        'Dungeon Level': 1,
         'Level': 1,
         'XP': 0,
         'XP Needed to Level Up': 10,
