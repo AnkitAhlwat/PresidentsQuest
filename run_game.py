@@ -34,11 +34,31 @@ def display_map():
             position = 0
 
 
-def check_for_event(coordinates):
+def check_for_event(y_coordinate, x_coordinate):
+    with open("coordinates.json", "r") as file_object:
+        coordinate_map = json.load(file_object)
     with open("event.json", "r") as file_object:
         event = json.load(file_object)
-        event_function = event[coordinates]
-        eval(f'{event_function}()')
+    coordinates = coordinate_map[f'{y_coordinate}:{x_coordinate}']
+    if coordinates == "[C]":
+            event_function = event[coordinates]
+            eval(f'{event_function}(y_coordinate, x_coordinate)')
+    elif coordinates in event:
+        with open("event.json", "r") as file_object:
+            event = json.load(file_object)
+            event_function = event[coordinates]
+            if coordinates == "[E]":
+                battle = get_user_choice("Confirmation","A battle is about to begin, Are you sure you want to proceed?",
+                                         ["Yes","No im a coward"])
+                if battle =="Yes":
+                    combat.clear_enemy_icon(y_coordinate, x_coordinate)
+                    eval(f'{event_function}()')
+                setup_current_location()
+            else:
+                eval(f'{event_function}()')
+
+
+
 
 
 
@@ -77,8 +97,7 @@ def update_current_location(y_coordinate, x_coordinate, direction):
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = "[ ]"
         character_dictionary["Y-coordinate"] = y_coordinate
         character_dictionary["X-coordinate"] = x_coordinate
-        check_for_event(coordinates[f'{y_coordinate}:{x_coordinate}'])
-
+        check_for_event(y_coordinate, x_coordinate)
         coordinates[f'{character_dictionary["Y-coordinate"]}:{character_dictionary["X-coordinate"]}'] = \
             Fore.BLUE + "[X]" + Style.RESET_ALL
 
