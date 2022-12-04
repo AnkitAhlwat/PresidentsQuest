@@ -7,7 +7,7 @@ import combat
 def open_loot(y_coordinate,x_coordinate):
     with open("character.json", "r") as file_object:
         player = json.load(file_object)
-    loot_die = Die(10)
+    loot_die = Die(6*player["Dungeon Level"])
     xp_result = loot_die.roll_die()
     gold_result = loot_die.roll_die()
     print("Oh looks like I found a chest...")
