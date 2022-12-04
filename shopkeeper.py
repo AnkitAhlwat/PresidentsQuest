@@ -39,12 +39,14 @@ def adjust_player_attack(item, player):
 
 
 def adjust_player_health(item, player):
-    if item >= player['Max HP']:
-        player['Current HP'] = player['Max HP']
-    else:
-        player['Current HP'] += item
-    if player['Current HP'] > player['Max HP']:
-        player['Current HP'] = player['Max HP']
+    # if item >= player['Max HP']:
+    #     player['Current HP'] = player['Max HP']
+    # else:
+    #     player['Current HP'] += item
+    # if player['Current HP'] > player['Max HP']:
+    #     player['Current HP'] = player['Max HP']
+    player['Max HP'] += item
+
     return
 
 
@@ -78,11 +80,11 @@ def shopkeeper(player):
         7:
             ["Painting of Abraham Lincoln", 12, 15],
         8:
-            ["Seized Documents from Mar-a-Lago", 15, 22],
+            ["Seized Documents from Mar-a-Lago", 15, 18],
         9:
-            ["Bald Eagle", 20, 50],
+            ["Bald Eagle", 20, 25],
         10:
-            ["The Constitution", 40, 80]
+            ["The Constitution", 40, 30]
     }
 
     food_dictionary = {
@@ -109,7 +111,7 @@ def shopkeeper(player):
         print(f"You currently have {player['Current HP']} HP and {player['Attack Points']} Attack Points.\n")
     else:
         print(f"Welcome to the White House Gift Shop, {player['Name']}.\n")
-        print("Here you can purchase weapons to level up your attack points or purchase food to heal your health"
+        print("Here you can purchase weapons to level up your attack points or purchase food to upgrade your max health"
               "points.\n")
         print(f"Your Stats:\n{player['Current HP']}/{player['Max HP']} HP     {player['Attack Points']} "
               f"Attack Points    ${player['Money']}\n")
