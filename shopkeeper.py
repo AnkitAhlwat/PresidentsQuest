@@ -46,6 +46,7 @@ def adjust_player_health(item, player):
     # if player['Current HP'] > player['Max HP']:
     #     player['Current HP'] = player['Max HP']
     player['Max HP'] += item
+    player['Current HP'] += item
 
     return
 
