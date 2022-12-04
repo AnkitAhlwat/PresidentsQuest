@@ -41,8 +41,8 @@ def check_for_event(y_coordinate, x_coordinate):
         event = json.load(file_object)
     coordinates = coordinate_map[f'{y_coordinate}:{x_coordinate}']
     if coordinates == "[C]":
-            event_function = event[coordinates]
-            eval(f'{event_function}(y_coordinate, x_coordinate)')
+        event_function = event[coordinates]
+        eval(f'{event_function}(y_coordinate, x_coordinate)')
     elif coordinates in event:
         with open("event.json", "r") as file_object:
             event = json.load(file_object)
@@ -56,6 +56,7 @@ def check_for_event(y_coordinate, x_coordinate):
                 setup_current_location()
             else:
                 eval(f'{event_function}()')
+
 
 
 
