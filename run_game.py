@@ -13,11 +13,15 @@ def run_totally_cool_celebration_protocol():
     quit()
 
 
-def check_if_goal_achieved():
+def upgrade_dungeon():
     with open("character.json", "r") as file_object:
         character_dictionary = json.load(file_object)
-        if character_dictionary["Achieved Goal"]:
+        character_dictionary["Dungeon Level"] += 1
+        if character_dictionary["Dungeon Level"] == 4:
             run_totally_cool_celebration_protocol()
+
+    with open("character.json", "w") as file_object:
+        json.dump(character_dictionary,file_object)
 
 
 def display_map():

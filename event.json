@@ -1,1 +1,1 @@
-{"   ": null, "[ ]": "check_for_random_enemy", "[S]": "shopkeeper.setup_shopkeeper", "[B]": "combat.setup_boss", "[E]": "combat.setup_combat", "[?]": "[?]", "[C]": "chest.open_loot"}
+{"   ": null, "[ ]": "check_for_random_enemy", "[S]": "shopkeeper.setup_shopkeeper", "[B]": "combat.setup_boss", "[-]": "upgrade_dungeon", "[E]": "combat.setup_combat", "[?]": "[?]", "[C]": "chest.open_loot"}
