@@ -6,6 +6,7 @@ def make_events():
                             "[ ]": "check_for_random_enemy",
                             "[S]": "shopkeeper.setup_shopkeeper",
                             "[B]": "combat.setup_boss",
+                            "[-]": "upgrade_dungeon",
                             "[E]": "combat.setup_combat",
                             "[?]": "[?]",
                             "[C]": "chest.open_loot"
@@ -18,6 +19,7 @@ def make_board():
         "1": "[ ]",
         "S": "[S]",
         "B": "[B]",
+        "-": "[-]",
         "E": "[E]",
         "?": "[?]",
         "C": "[C]"
