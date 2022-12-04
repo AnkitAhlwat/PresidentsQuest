@@ -25,7 +25,7 @@ def open_loot(y_coordinate,x_coordinate):
         json.dump(coordinates_map, file_object)
     run_game.setup_current_location()
 def main():
-    open_loot()
+    open_loot(y_coordinate=None, x_coordinate=None)
 
 
 if __name__ == '__main__':
