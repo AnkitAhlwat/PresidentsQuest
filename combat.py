@@ -187,8 +187,6 @@ def update_money_and_xp(enemy, enemy_hp, player):
     with open("character.json", 'w') as file_object:
         json.dump(player, file_object)
 
-
-
     check_if_level_up(player)
 
 
@@ -257,21 +255,17 @@ def fight(enemy, player, difficulty):
 
 
 def combat(enemy, player, difficulty):
-    print(combat_opening_interaction(enemy, player))
-    print()
-    user_choice = fight_or_leave()
-    if user_choice == "Fight":
-        is_fight_valid = check_player_inventory(enemy, player)
-        if is_fight_valid:
-            fight(enemy, player, difficulty)
-            run_game.setup_current_location()
-            return
-        else:
-            run_game.setup_current_location()
-
+    # print(combat_opening_interaction(enemy, player))
+    # print()
+    # user_choice = fight_or_leave()
+    # if user_choice == "Fight":
+    is_fight_valid = check_player_inventory(enemy, player)
+    if is_fight_valid:
+        fight(enemy, player, difficulty)
+        run_game.setup_current_location()
+        return
     else:
         run_game.setup_current_location()
-
 
 def setup_boss():
     with open("character.json", "r+") as file_object:
@@ -280,19 +274,25 @@ def setup_boss():
     with open("character.json", "r") as file_object:
         character_dictionary = json.load(file_object)
         party = character_dictionary["Political Party"]
+        dungeon_level = character_dictionary["Dungeon Level"]
 
     democrat_boss = ["Alexandria Ocasio-Cortez", "Bernie Sanders", "Joe Biden"]
     republican_boss = ["Ted Cruz", "George W. Bush", "Donald Trump"]
     if party == "Republican":
-        level_one_boss = Enemy(democrat_boss[0], "Boss", 1, 10, 4)
-        level_two_boss = Enemy(democrat_boss[1], "Boss", 1, 10, 4)
-        level_three_boss = Enemy(democrat_boss[2], "Boss", 1, 10, 4)
+        level_one_boss = Enemy(democrat_boss[dungeon_level], "Boss", 1, 10, 4)
+        # level_one_boss = Enemy(democrat_boss[0], "Boss", 1, 10, 4)
+        # level_two_boss = Enemy(democrat_boss[1], "Boss", 1, 10, 4)
+        # level_three_boss = Enemy(democrat_boss[2], "Boss", 1, 10, 4)
     else:
-        level_one_boss = Enemy(republican_boss[0], "Boss", 1, 10, 4)
-        level_two_boss = Enemy(republican_boss[1], "Boss", 1, 10, 4)
-        level_three_boss = Enemy(republican_boss[2], "Boss", 1, 10, 4)
-
-    combat(level_one_boss, player, "Hard")
+        level_one_boss = Enemy(republican_boss[dungeon_level], "Boss", 1, 10, 4)
+        # level_one_boss = Enemy(republican_boss[0], "Boss", 1, 10, 4)
+        # level_two_boss = Enemy(republican_boss[1], "Boss", 1, 10, 4)
+        # level_three_boss = Enemy(republican_boss[2], "Boss", 1, 10, 4)
+    print(combat_opening_interaction(level_one_boss, player))
+    print()
+    user_choice = fight_or_leave()
+    if user_choice == "Fight":
+        combat(level_one_boss, player, "Easy")
 
 
 def setup_combat():
@@ -348,7 +348,9 @@ def setup_combat():
             enemy = level_three_enemies_republican[random.randint(0, 2)]
         else:
             enemy = mike_pence  # lol jokes
-
+        print(combat_opening_interaction(enemy, player))
+        print()
+        sleep(2)
         combat(enemy, player, "Easy")
 
 
