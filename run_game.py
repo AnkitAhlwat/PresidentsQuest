@@ -10,6 +10,22 @@ from time import sleep
 
 def run_totally_cool_celebration_protocol():
     print("What did you expect a cool celebration or something? Scram kid your the president now go do some work")
+    sleep(2)
+    print("Im kidding, I would never speak that way to the new president\n")
+    print("""
+           -=[ white house ]=-  1/99
+
+                            _ _.-'`-._ _
+                           ;.'________'.;
+                _________n.[____________].n_________
+               |""_""_""_""||==||==||==||""_""_""_""]
+               |""""""""""||..||..||..||"""""""""""|
+               |LI LI LI LI||LI||LI||LI||LI LI LI LI|
+               |.. .. .. ..||..||..||..||.. .. .. ..|
+               |LI LI LI LI||LI||LI||LI||LI LI LI LI|
+            ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,,
+           ;;jgs;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    """)
     quit()
 
 
@@ -21,7 +37,7 @@ def upgrade_dungeon():
             run_totally_cool_celebration_protocol()
 
     with open("character.json", "w") as file_object:
-        json.dump(character_dictionary,file_object)
+        json.dump(character_dictionary, file_object)
 
 
 def display_map():
@@ -52,9 +68,10 @@ def check_for_event(y_coordinate, x_coordinate):
             event = json.load(file_object)
             event_function = event[coordinates]
             if coordinates == "[E]":
-                battle = get_user_choice("Confirmation","A battle is about to begin, Are you sure you want to proceed?",
-                                         ["Yes","No im a coward"])
-                if battle =="Yes":
+                battle = get_user_choice("Confirmation",
+                                         "A battle is about to begin, Are you sure you want to proceed?",
+                                         ["Yes", "No im a coward"])
+                if battle == "Yes":
                     combat.clear_enemy_icon(y_coordinate, x_coordinate)
                     eval(f'{event_function}()')
                 setup_current_location()
@@ -64,12 +81,6 @@ def check_for_event(y_coordinate, x_coordinate):
                 setup_current_location()
             else:
                 eval(f'{event_function}()')
-
-
-
-
-
-
 
 
 def check_for_random_enemy():
