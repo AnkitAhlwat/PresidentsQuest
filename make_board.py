@@ -1,5 +1,6 @@
 import json
 
+
 def make_events():
     with open("event.json", "w") as file_object:
         event_dictionary = {"   ": None,
@@ -12,6 +13,8 @@ def make_events():
                             "[C]": "chest.open_loot"
                             }
         json.dump(event_dictionary, file_object)
+
+
 def make_board():
     icons = {
         "X": "[X]",

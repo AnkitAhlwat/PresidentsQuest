@@ -56,32 +56,35 @@ def display_map():
 
 
 def check_for_event(y_coordinate, x_coordinate):
+
     with open("coordinates.json", "r") as file_object:
         coordinate_map = json.load(file_object)
     with open("event.json", "r") as file_object:
         event = json.load(file_object)
+
     coordinates = coordinate_map[f'{y_coordinate}:{x_coordinate}']
-    if coordinates == "[C]":
+
+    if coordinates in event:
         event_function = event[coordinates]
-        eval(f'{event_function}(y_coordinate, x_coordinate)')
-    elif coordinates in event:
-        with open("event.json", "r") as file_object:
-            event = json.load(file_object)
+        if coordinates == "[C]":
             event_function = event[coordinates]
-            if coordinates == "[E]":
-                battle = get_user_choice("Confirmation",
-                                         "A battle is about to begin, Are you sure you want to proceed?",
-                                         ["Yes", "No im a coward"])
-                if battle == "Yes":
-                    combat.clear_enemy_icon(y_coordinate, x_coordinate)
-                    eval(f'{event_function}()')
-                setup_current_location()
-            elif coordinates == "[-]":
+            eval(f'{event_function}(y_coordinate, x_coordinate)')
+
+        if coordinates == "[E]":
+            battle = get_user_choice("Confirmation",
+                                     "A battle is about to begin, Are you sure you want to proceed?",
+                                     ["Yes", "No im a coward"])
+            if battle == "Yes":
                 combat.clear_enemy_icon(y_coordinate, x_coordinate)
                 eval(f'{event_function}()')
-                setup_current_location()
-            else:
-                eval(f'{event_function}()')
+            setup_current_location()
+
+        elif coordinates == "[-]":
+            combat.clear_enemy_icon(y_coordinate, x_coordinate)
+            eval(f'{event_function}()')
+            setup_current_location()
+        else:
+            eval(f'{event_function}()')
 
 
 def check_for_random_enemy():

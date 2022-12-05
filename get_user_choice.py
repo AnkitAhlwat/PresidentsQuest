@@ -2,11 +2,9 @@ import inquirer
 import os
 import platform
 
+
 def get_user_choice(questiontype, prompt, choices):
-    # title = prompt
-    # options = choices
-    # enumerate_options = enumerate(options)
-    # option, index = pick(list(enumerate_options), title)
+
     questions = [
         inquirer.List(questiontype,
                       message=prompt,
@@ -15,7 +13,7 @@ def get_user_choice(questiontype, prompt, choices):
     ]
 
     answers = inquirer.prompt(questions)
-    if platform.system() =="Darwin":
+    if platform.system() == "Darwin":
         os.system("clear")
     else:
         os.system('cls')

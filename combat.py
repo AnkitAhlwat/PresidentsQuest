@@ -160,22 +160,14 @@ def update_money_and_xp(enemy, enemy_hp, player):
         rand_xp = random.randint(1, 3)
         player['Money'] += random.randint(1, 4)
         player['XP'] += rand_xp
-        print(rand_xp)
-        print(player['XP'])
-
-        print("Block 1 ran")
 
     if enemy_hp <= 0 and enemy.level == 2:
         player['Money'] += random.randint(4, 8)
         player['XP'] += random.randint(3, 6)
 
-        print("Block 2 ran")
-
     if enemy_hp <= 0 and enemy.level == 3:
         player['Money'] += random.randint(10, 20)
         player['XP'] += random.randint(6, 10)
-
-        print("Block 3 ran")
 
     with open("character.json", 'w') as file_object:
         json.dump(player, file_object)
@@ -319,7 +311,7 @@ def setup_combat():
         level_three_enemies_democrat = [barack_obama, hilary_clinton, bill_clinton]
 
         player_political_party = player["Political Party"]
-        player_level = player["Level"]
+        player_level = player["Dungeon Level"]
 
         if player_political_party == "Republican" and player_level == 1:
             enemy = level_one_enemies_democrat[random.randint(0, 2)]
