@@ -44,11 +44,12 @@ def second_chance(player):
             print(Fore.MAGENTA + "Congratulations, I will give you your life back. Albeit at a cost..." +
                   Style.RESET_ALL)
             sleep(2)
-            print(Fore.MAGENTA + "Your health has been reduced to 1 and you are sent back to the previous room." +
+            print(Fore.MAGENTA + "Your health has been reduced by half and you are sent back to the previous room." +
                   Style.RESET_ALL)
             print()
             sleep(3)
-            character_dictionary["Current HP"] = 1
+            character_dictionary["Current HP"] = int(character_dictionary["Current HP"] / 2)
+            character_dictionary["Max HP"] = int(character_dictionary["Max HP"] / 2)
             with open("character.json", "w") as file_object:
                 json.dump(character_dictionary, file_object)
             run_game.setup_current_location()
@@ -261,10 +262,10 @@ def setup_boss():
     republican_boss = ["Ted Cruz", "George W. Bush", "Donald Trump"]
     if party == "Republican":
         boss = Enemy(democrat_boss[dungeon_level - 1], "Boss", 1 * dungeon_level, 30 * dungeon_level,
-                     10 * dungeon_level)
+                     4 * dungeon_level)
     else:
         boss = Enemy(republican_boss[dungeon_level - 1], "Boss", 1 * dungeon_level, 30 * dungeon_level,
-                     10 * dungeon_level)
+                     6 * dungeon_level)
     print(combat_opening_interaction(boss, player))
     print()
     user_choice = fight_or_leave()
@@ -282,25 +283,25 @@ def setup_combat():
         sarah_palin = Enemy("Sarah Palin", "Minion", 1, 3, 1)
         mike_pence = Enemy("Mike Pence", "Minion", 1, 3, 2)
 
-        rand_paul = Enemy("Rand Paul", "Minion", 2, 25, 4)
-        arnold_schwarzenegger = Enemy("Arnold Schwarzenegger", "Minion", 2, 15, 8)
-        jeb_bush = Enemy("Jeb Bush", "Minion", 2, 30, 5)
+        rand_paul = Enemy("Rand Paul", "Minion", 2, 20, 4)
+        arnold_schwarzenegger = Enemy("Arnold Schwarzenegger", "Minion", 2, 18, 4)
+        jeb_bush = Enemy("Jeb Bush", "Minion", 2, 5, 7)
 
-        mitt_romney = Enemy("Mitt Romney", "Minion", 3, 50, 12)
-        dick_cheney = Enemy("Dick Cheney", "Minion", 3, 35, 23)
-        nikki_haley = Enemy("Nikki Haley", "Minion", 3, 45, 17)
+        mitt_romney = Enemy("Mitt Romney", "Minion", 3, 36, 8)
+        dick_cheney = Enemy("Dick Cheney", "Minion", 3, 40, 6)
+        nikki_haley = Enemy("Nikki Haley", "Minion", 3, 37, 7)
 
         andrew_yang = Enemy("Andrew Yang", "Minion", 1, 3, 2)
         jimmy_carter = Enemy("Jimmy Carter", "Minion", 1, 1, 1)
         kamala_harris = Enemy("Kamala Harris", "Minion", 1, 2, 3)
 
-        beto_orourke = Enemy("Beto O'Rourke", "Minion", 2, 24, 6)
-        nancy_pelosi = Enemy("Nancy Pelosi", "Minion", 2, 30, 2)
-        al_gore = Enemy("Al Gore", "Minion", 2, 15, 8)
+        beto_orourke = Enemy("Beto O'Rourke", "Minion", 2, 22, 3)
+        nancy_pelosi = Enemy("Nancy Pelosi", "Minion", 2, 21, 4)
+        al_gore = Enemy("Al Gore", "Minion", 2, 5, 8)
 
-        barack_obama = Enemy("Barack Obama", "Minion", 3, 50, 28)
-        hilary_clinton = Enemy("Hilary Clinton", "Minion", 3, 40, 25)
-        bill_clinton = Enemy("Bill Clinton", "Minion", 3, 25, 40)
+        barack_obama = Enemy("Barack Obama", "Minion", 3, 36, 8)
+        hilary_clinton = Enemy("Hilary Clinton", "Minion", 3, 40, 9)
+        bill_clinton = Enemy("Bill Clinton", "Minion", 3, 40, 6)
 
         level_one_enemies_republican = [ben_carson, sarah_palin, mike_pence]
         level_two_enemies_republican = [rand_paul, arnold_schwarzenegger, jeb_bush]
@@ -321,7 +322,7 @@ def setup_combat():
             enemy = level_three_enemies_democrat[random.randint(0, 2)]
         elif player_political_party == "Democrat" and player_level == 1:
             enemy = level_one_enemies_republican[random.randint(0, 2)]
-        elif player_political_party == "Democrat" and player_level >= 2:
+        elif player_political_party == "Democrat" and player_level == 2:
             enemy = level_two_enemies_republican[random.randint(0, 2)]
         elif player_political_party == "Democrat" and player_level >= 3:
             enemy = level_three_enemies_republican[random.randint(0, 2)]

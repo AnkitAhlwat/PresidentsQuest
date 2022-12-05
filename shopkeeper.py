@@ -67,19 +67,19 @@ def shopkeeper(player):
         3:
             ["Democrat Hat", 1, 1],
         4:
-            ["Bible", 5, 5],
+            ["Bible", 3, 3],
         5:
-            ["Unfinished Memo to Justin Trudeau", 6, 8],
+            ["Unfinished Memo to Justin Trudeau", 5, 5],
         6:
-            ["Presidential Pen", 10, 12],
+            ["Presidential Pen", 10, 11],
         7:
-            ["Painting of Abraham Lincoln", 12, 15],
+            ["Painting of Abraham Lincoln", 12, 13],
         8:
-            ["Seized Documents from Mar-a-Lago", 15, 18],
+            ["Seized Documents from Mar-a-Lago", 15, 16],
         9:
-            ["Bald Eagle", 20, 25],
+            ["Bald Eagle", 17, 18],
         10:
-            ["The Constitution", 40, 30]
+            ["The Constitution", 20, 22]
     }
 
     food_dictionary = {
